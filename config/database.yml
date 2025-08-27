@@ -1,0 +1,34 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: db # compose.ymlで定義したサービス名
+  username: postgres # 接続ユーザー名
+  password: password # 接続パスワード（database.yml のパスワードと一致）
+
+
+development:
+  <<: *default
+  database: myapp_development
+
+
+test:
+  <<: *default
+  database: myapp_test
+
+
+production:
+  primary: &primary
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  cache:
+    <<: *primary
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary
+    migrations_paths: db/cable_migrate
