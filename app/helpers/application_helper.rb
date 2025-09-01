@@ -1,4 +1,5 @@
 module ApplicationHelper
+<<<<<<< HEAD
   # /app/assets/images/icons/<name>.svg をインライン描画
   def inline_svg(name, classes: "w-6 h-6", aria_hidden: true)
     path = Rails.root.join("app/assets/images/icons/#{name}.svg")
@@ -21,4 +22,6 @@ module ApplicationHelper
       concat content_tag(:span, label, class: "leading-none")
     end
   end
+=======
+>>>>>>> origin/main
 end
