@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   # 公開トップページ
   root "top#index"
 
+  resources :groups,  only: [:index]
 end
