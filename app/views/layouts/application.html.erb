@@ -2,14 +2,14 @@
 <html lang="ja">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="format-detection" content="telephone=no"><!-- iOSのTEL自動リンク抑止 -->
+  <meta name="format-detection" content="telephone=no">
   <title><%= content_for?(:title) ? yield(:title) : "ヘルスノ陣" %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= favicon_link_tag "favicon.png" %> <!-- 追加: /app/assets/images に設置 -->
+  <%= favicon_link_tag "favicon.png" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  <%= yield :head %> <!-- 追加: 画面ごとの追加タグ/スクリプト差し込み口 -->
+  <%= yield :head %>
 </head>
 
 <body class="min-h-[100dvh] flex flex-col bg-gray-50 text-gray-900
@@ -22,12 +22,11 @@
   <%= render "shared/header" %>
 
   <main id="main" class="container mx-auto max-w-screen-xl w-full flex-1 px-4 sm:px-6 lg:px-8 py-6">
-    <%= render "shared/flash" if lookup_context.exists?("shared/flash") %> <!-- パス表記を修正 -->
+    <%= render "shared/flash" if lookup_context.exists?("shared/flash") %>
     <%= yield %>
   </main>
 
   <%= render "shared/footer" %>
 
-  <!-- iOSのホームインジケータ重なり対策（必要ならフッター側に移してもOK） -->
   <div class="h-[env(safe-area-inset-bottom)]"></div>
 </body>
