@@ -1,0 +1,10 @@
+<footer class="border-t bg-white pb-[calc(env(safe-area-inset-bottom)+0.25rem)]">
+  <nav class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8" aria-label="フッターナビ">
+    <ul class="grid grid-cols-4 gap-1">
+      <li><%= footer_nav_link_to root_path,          "ホーム",     icon: "home" %></li>
+      <li><%= footer_nav_link_to records_path || "#","記録",       icon: "record" %></li>
+      <li><%= footer_nav_link_to groups_path  || "#","グループ",   icon: "group" %></li>
+      <li><%= footer_nav_link_to mypage_path  || "#","マイページ", icon: "my-page" %></li>
+    </ul>
+  </nav>
+</footer>
