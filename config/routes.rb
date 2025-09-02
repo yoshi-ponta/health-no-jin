@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # 公開トップページ
   root "top#index"
 
-  resources :groups,  only: [:index]
-  resources :records, only: [:index, :new, :create, :show]
-  resource :mypage, only: [:show, :edit, :update]
+  resources :groups,  only: [ :index ]
+  resources :records, only: [ :index, :new, :create, :show ]
+  resource :mypage, only: [ :show, :edit, :update ]
 end
