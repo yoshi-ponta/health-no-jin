@@ -1,6 +1,6 @@
 <div>
   <div class="max-w-md pb-24">
-  <%#= image_pack_tag 'media/images/top3.png' %>
+  <%#アイコン画像のリンク%>
     <div class="text-center border-dotted border-t-2 border-fitting-pink py-20">
       <h1 class="font-kaisei text-2xl title-font text-gray-900 mb-4">ヘルスノ陣の使い方</h1>
       <div class="text-base leading-relaxed mx-auto text-gray-500">
@@ -13,7 +13,7 @@
     <div class="flex flex-wrap">
       <div class="mb-6 p-4 flex flex-col text-center items-center">
         <div class="inline-flex items-center justify-center justify-center mb-5 flex-shrink-0">
-          <%#= image_pack_tag 'media/images/search.svg' %>
+          <%= image_tag 'illustrations/step1-signup.png', alt: 'ユーザー登録の流れ' %>
         </div>
         <div class="flex-grow">
           <h2 class="font-kaisei text-gray-900 text-lg title-font font-medium mb-3">その1. ユーザー登録をしてみよう</h2>
@@ -22,7 +22,7 @@
       </div>
       <div class="mb-6 p-4 flex flex-col text-center items-center">
         <div class="inline-flex items-center justify-center mb-5 flex-shrink-0">
-          <%#= image_pack_tag 'media/images/login.svg' %>
+          <%= image_tag 'illustrations/step2-log-exercise.png', alt: '運動記録の方法' %>
         </div>
         <div class="flex-grow">
           <h2 class="font-kaisei text-gray-900 text-lg title-font font-medium mb-3">その2. 運動を記録しよう</h2>
@@ -31,7 +31,7 @@
       </div>
       <div class="mb-6 p-4 flex flex-col text-center items-center">
         <div class="inline-flex items-center justify-center mb-5 flex-shrink-0">
-          <%#= image_pack_tag 'media/images/post.svg' %>
+          <%= image_tag 'illustrations/step3-group.png', alt: 'グループ参加の方法' %>
         </div>
         <div class="flex-grow">
           <h2 class="font-kaisei text-gray-900 text-lg title-font font-medium mb-3">その3. グループを作成／参加しよう</h2>
