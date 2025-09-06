@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Kaisei Decol", ui-serif, serif;
+
+  --color-slate-900: oklch(0.18 0.02 260);
+  --color-slate-600: oklch(0.45 0.02 260);
+
+  --color-indigo:     oklch(0.45 0.12 256);
+  --color-indigo-600: oklch(0.38 0.12 256);
+  --color-muted: var(--color-slate-600);
+
+  --spacing-45: 11.25rem;
+}
