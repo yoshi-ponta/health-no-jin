@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
     # 未ログイン → / (Top)
-    unauthenticated :user do
+    unauthenticated do
       root to: "top#index", as: :unauthenticated_root
     end
 
