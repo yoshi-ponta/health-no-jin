@@ -1,0 +1,19 @@
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/erb-5.0.2/ext/erb/escape
+/home/yoshimaru/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-wauf56 sitelibdir\=./.gem.20250911-26848-wauf56 clean
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-wauf56 sitelibdir\=./.gem.20250911-26848-wauf56
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-wauf56 sitelibdir\=./.gem.20250911-26848-wauf56 install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250911-26848-wauf56/erb
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-wauf56 sitelibdir\=./.gem.20250911-26848-wauf56 clean
