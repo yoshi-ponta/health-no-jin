@@ -1,0 +1,25 @@
+ja:
+  users:
+    registrations:
+      new:
+        title: "新規登録"
+        description: "メールアドレスとパスワードを入力してください。"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_hint: "最低6文字"
+        password_confirmation: "パスワード（確認）"
+        submit: "アカウントを作成する"
+        error_summary_title: "入力内容を確認してください"
+        have_account: "すでにアカウントをお持ちですか？"
+        login_link: "ログイン"
+  shared:
+    header:
+      login: "ログイン"
+      logout: "ログアウト"
+      logout_confirm: "ログアウトしますか？"
+      guide: "ガイド"
+    footer:
+      home: "ホーム"
+      record: "記録"
+      group: "グループ"
+      my_page: "マイページ"
