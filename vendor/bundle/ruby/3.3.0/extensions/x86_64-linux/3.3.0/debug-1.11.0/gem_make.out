@@ -1,0 +1,19 @@
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/debug-1.11.0/ext/debug
+/home/yoshimaru/.rbenv/versions/3.3.6/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-4usfra sitelibdir\=./.gem.20250911-26848-4usfra clean
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-4usfra sitelibdir\=./.gem.20250911-26848-4usfra
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-4usfra sitelibdir\=./.gem.20250911-26848-4usfra install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20250911-26848-4usfra/debug
+
+current directory: /home/yoshimaru/卒業制作/health-no-jin/vendor/bundle/ruby/3.3.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250911-26848-4usfra sitelibdir\=./.gem.20250911-26848-4usfra clean
