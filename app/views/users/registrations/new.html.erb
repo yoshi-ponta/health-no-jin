@@ -1,11 +1,11 @@
 <div class="min-h-[80svh] grid place-items-center px-4">
   <div class="w-full max-w-md rounded-2xl bg-white/90 shadow-lg ring-1 ring-black/5 p-6 sm:p-8">
-    <h1 class="text-2xl font-bold tracking-tight text-gray-900 mb-2">新規登録</h1>
-    <p class="text-sm text-gray-500 mb-6">メールアドレスとパスワードを入力してください。</p>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 mb-2"><%= t('.title') %></h1>
+    <p class="text-sm text-gray-500 mb-6"><%= t('.description') %></p>
 
     <% if resource.errors.any? %>
       <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert" aria-live="polite">
-        <p class="font-semibold mb-2">入力内容を確認してください</p>
+        <p class="font-semibold mb-2"><%=t('.error_summary_title')%></p>
         <ul class="list-disc pl-5 space-y-1">
           <% resource.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -18,7 +18,7 @@
 
       <% email_has_error = resource.errors[:email].present? %>
       <div>
-        <%= f.label :email, "メールアドレス", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :email, t('.email'), class: "block text-sm font-medium text-gray-700" %>
         <%= f.email_field :email,
               autofocus: true,
               autocomplete: "email",
@@ -38,8 +38,8 @@
       <% pw_has_error = resource.errors[:password].present? %>
       <div>
         <div class="flex items-baseline justify-between">
-          <%= f.label :password, "パスワード", class: "block text-sm font-medium text-gray-700" %>
-          <span class="text-xs text-gray-400">最低6文字</span>
+          <%= f.label :password, t('.password'), class: "block text-sm font-medium text-gray-700" %>
+          <span class="text-xs text-gray-400"><%=t('.password_hint')%></span>
         </div>
         <%= f.password_field :password,
               autocomplete: "new-password",
@@ -57,7 +57,7 @@
 
       <% pc_has_error = resource.errors[:password_confirmation].present? %>
       <div>
-        <%= f.label :password_confirmation, "パスワード（確認）", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :password_confirmation, t('.password_confirmation'), class: "block text-sm font-medium text-gray-700" %>
         <%= f.password_field :password_confirmation,
               autocomplete: "new-password",
               required: true,
@@ -73,14 +73,14 @@
       </div>
 
       <div class="pt-2">
-        <%= f.submit "アカウントを作成する",
+        <%= f.submit t('.submit'),
               class: "w-full rounded-xl bg-black px-4 py-2.5 text-white font-semibold shadow hover:opacity-90 transition" %>
       </div>
     <% end %>
 
     <div class="mt-6 text-center text-sm">
-      すでにアカウントをお持ちですか？
-      <%= link_to "ログイン", new_user_session_path, class: "font-semibold text-gray-900 underline underline-offset-4 hover:opacity-80" %>
+      <%=t('.have_account')%>
+      <%= link_to t('.login_link'), new_user_session_path, class: "font-semibold text-gray-900 underline underline-offset-4 hover:opacity-80" %>
     </div>
   </div>
 </div>
