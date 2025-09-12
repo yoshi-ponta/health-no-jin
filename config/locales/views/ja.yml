@@ -6,12 +6,26 @@ ja:
         description: "メールアドレスとパスワードを入力してください。"
         email: "メールアドレス"
         password: "パスワード"
-        password_hint: "最低6文字"
+        password_hint: "半角英数字で入力"
         password_confirmation: "パスワード（確認）"
         submit: "アカウントを作成する"
         error_summary_title: "入力内容を確認してください"
         have_account: "すでにアカウントをお持ちですか？"
         login_link: "ログイン"
+    sessions:
+      new:
+        title: ログイン
+        description: メールアドレスとパスワードを入力してください
+        email: メールアドレス
+        password: パスワード
+        password_hint: 半角英数字で入力
+        remember_me: ログイン状態を保持する
+        submit: ログイン
+        toggle_pw: 表示
+        error_summary_title: ログインできませんでした
+        forgot_password_link: パスワードをお忘れですか？
+        no_account: アカウントをお持ちでない方は
+        signup_link: 新規登録へ
   shared:
     header:
       login: "ログイン"
