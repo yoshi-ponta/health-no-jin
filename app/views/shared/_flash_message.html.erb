@@ -1,0 +1,12 @@
+<% flash.each do |type, msg| %>
+  <% next if msg.blank? %>
+
+  <% box = case type.to_sym
+    when :notice, :success then "border-green-200 bg-green-50 text-green-800"
+    when :alert, :error, :danger then "border-red-200 bg-red-50 text-red-800"
+    end %>
+
+  <div class="mb-4 rounded-lg border p-3 text-sm <%= box %>" role="status" aria-live="polite">
+    <%= msg %>
+  </div>
+<% end %>
