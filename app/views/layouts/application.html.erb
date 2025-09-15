@@ -4,11 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
   <title><%= content_for?(:title) ? yield(:title) : "ヘルスノ陣" %></title>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= favicon_link_tag "favicon.png" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   <%= yield :head %>
 </head>
 
@@ -21,8 +21,10 @@
 
   <%= render "shared/header" %>
 
-  <main id="main" class="container mx-auto max-w-screen-xl w-full flex-1 px-4 sm:px-6 lg:px-8 py-6">
-    <%= render "shared/flash" if lookup_context.exists?("shared/flash") %>
+  <main id="main" class="container mx-auto max-w-screen-xl w-full flex-1 px-4 sm:px-6 lg:px-8 pt-3 py-6">
+    <div class="mb-0">
+    <%= render "shared/flash_message" %>
+    </div>
     <%= yield %>
   </main>
 
