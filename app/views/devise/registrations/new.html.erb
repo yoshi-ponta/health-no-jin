@@ -3,7 +3,7 @@
     <h1 class="text-xl font-bold mb-4"><%= t(".title") %></h1>
     <p class="text-sm text-gray-500 mb-6"><%= t(".description") %></p>
 
-    <%= form_with model: resource, url: registration_path(resource_name), scope: resource_name do |f| %>
+    <%= form_with model: resource,scope: resource_name,url: registration_path(resource_name),method: :post,local: true,data: { turbo: false } do |f| %>
       <div class="mb-4">
         <%= f.label :email, t(".email"), class: "block text-sm mb-1" %>
         <%= f.email_field :email,
@@ -37,7 +37,7 @@
         <% end %>
       </div>
 
-      <%= f.submit t(".submit"), class: "w-full rounded bg-black text-white py-2 font-semibold" %>
+      <%= button_tag t(".submit"), type: "submit",class: "w-full rounded bg-black text-white py-2 font-semibold" %>
     <% end %>
 
     <div class="mt-4 text-sm">
