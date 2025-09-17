@@ -1,0 +1,4 @@
+one:
+  id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  email: one@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
