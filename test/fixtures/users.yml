@@ -1,0 +1,9 @@
+one:
+  id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  email: one@example.com
+  encrypted_password: ""
+
+two:
+  id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  email: two@example.com
+  encrypted_password: ""
