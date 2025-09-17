@@ -1,0 +1,28 @@
+<div class="min-h-[70vh] grid place-items-center px-4">
+  <div class="w-full max-w-xl">
+    <h1 class="text-2xl font-bold mb-3 text-center">グループを作成</h1>
+
+    <div class="rounded-2xl border shadow-md p-6 bg-white">
+      <%= form_with model: @group, data: { turbo: false } do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, "グループ名", class: "block mb-1" %>
+          <%= f.text_field :name,
+                required: true,
+                autofocus: true,
+                placeholder: "例）チーム〇〇",
+                class: "w-full border rounded-2xl p-4 text-lg" %>
+          <% if @group.errors[:name].present? %>
+            <p class="text-red-600 text-sm mt-1"><%= @group.errors[:name].to_sentence %></p>
+          <% end %>
+        </div>
+
+      <div class="grid gap-2 sm:grid-cols-2">
+        <%= f.submit "作成してホームへ",
+                class: "h-12 rounded-2xl border shadow-sm font-bold" %>
+          <%= link_to "キャンセル", home_path,
+                class: "h-12 rounded-2xl border shadow-sm grid place-items-center font-bold" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
