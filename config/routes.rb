@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  if defined?(Devise)
   devise_for :users
 
     # 未ログイン → / (Top)
@@ -10,8 +9,8 @@ Rails.application.routes.draw do
     # ログイン済み → / (Home)
     authenticated :user do
       root to: "home#index", as: :authenticated_root
+      resources :groups, only: [ :index, :new, :create ]
     end
-  end
 
   root "top#index"
 
@@ -21,7 +20,6 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :groups,  only: [ :index ]
   resources :records, only: [ :index, :new, :create, :show ]
   resource :mypage, only: [ :show, :edit, :update ]
 end
