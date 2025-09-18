@@ -10,6 +10,6 @@ class CreateExerciseLogs < ActiveRecord::Migration[8.0]
     end
 
     add_index :exercise_logs, :performed_at
-    add_index :exercise_logs, [:user_id, :performed_at]
+    add_index :exercise_logs, [ :user_id, :performed_at ]
   end
 end
