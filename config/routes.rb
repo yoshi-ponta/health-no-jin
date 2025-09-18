@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     authenticated :user do
       root to: "home#index", as: :authenticated_root
       resources :groups, only: [ :index, :new, :create ]
-      resources :exercise_logs, only: [ :index, :new, :create]
+      resources :exercise_logs, only: [ :index, :new, :create ]
     end
 
   root "top#index"
