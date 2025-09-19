@@ -12,12 +12,11 @@
   <%= yield :head %>
 </head>
 
-<body class="min-h-[100dvh] flex flex-col bg-gray-50 text-gray-900
+<body class="min-h-[100dvh] flex flex-col
+             bg-[linear-gradient(180deg,#FDFBF7_0%,#FAF5E6_100%)]
+             text-[#2E2E2E]
+             selection:bg-[#333333] selection:text-[#FDFBF7]
              pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2
-                        bg-white/90 px-3 py-2 rounded shadow">
-    メインコンテンツへスキップ
-  </a>
 
   <%= render "shared/header" %>
 
