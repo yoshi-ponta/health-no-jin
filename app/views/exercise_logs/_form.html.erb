@@ -1,0 +1,29 @@
+<%= form_with model: @exercise_log, url: exercise_logs_path, local: true, data: { turbo: false } do |f| %>
+  <div class="space-y-5">
+  <div>
+    <%= f.label :exercise_item_id, "種目" %>
+    <%= f.collection_select :exercise_item_id,
+          ExerciseItem.order(:name), :id, :name,
+          { prompt: "選択してください" } %>
+  </div>
+
+  <div>
+    <%= f.label :amount, "回数（分）" %>
+    <%= f.number_field :amount, min: 1, step: 1, inputmode: "numeric" %>
+  </div>
+
+  <div>
+    <%= f.label :performed_at, "実施日" %>
+    <%= f.date_field :performed_at,
+          value: (@exercise_log.performed_at&.in_time_zone&.to_date) %>
+  </div>
+  <div class="text-center">
+  <%= f.submit "記録する",
+  class: "mt-6 inline-flex items-center justify-center
+          w-full sm:w-auto px-8 h-12 mx-auto rounded-2xl
+          bg-blue-600 text-white font-bold hover:bg-blue-700
+          focus:outline-none focus:ring-4 focus:ring-blue-300
+          shadow-md hover:shadow-lg transition" %>
+  </div>
+  </div>
+<% end %>

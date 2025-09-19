@@ -1,0 +1,12 @@
+walking:
+  name: ウォーキング
+  base_points: 1
+running:
+  name: ランニング
+  base_points: 2
+stretch:
+  name: ストレッチ
+  base_points: 1
+workout:
+  name: 筋トレ
+  base_points: 3
