@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
     resources :groups,        only: [ :index, :new, :create ]
     resources :exercise_logs, only: [ :index, :new, :create ]
-
   root "top#index"
 
   # 開発用（直接アクセスしたい時用）
