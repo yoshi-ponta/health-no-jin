@@ -1,11 +1,17 @@
 <% if @active_group.present? %>
   <!-- HomeB,グループ加入後 -->
   <div class="text-center">
+    <div class="mt-10 sm:mt-14">
     <%#= image_tag "castle.png", alt: "あなたの城", width: 200, height: 200 %>
     <div class="text-3xl sm:text-4xl font-extrabold">🏯 城の画像置き場</div>
     <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
-
-    <%= link_to "運動を記録する", new_record_path %>
+    </div>
+    <%= link_to "運動を記録する", new_exercise_log_path,
+  class: "mt-8 inline-flex items-center justify-center
+          px-6 h-12 rounded-2xl mx-auto
+          bg-blue-600 text-white font-bold hover:bg-blue-700
+          focus:outline-none focus:ring-4 focus:ring-blue-300
+          shadow-md hover:shadow-lg transition" %>
   </div>
 
 <% else %>
