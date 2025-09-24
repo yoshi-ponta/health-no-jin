@@ -1,10 +1,32 @@
-<footer class="bg-[linear-gradient(180deg,#F192A5_0%,#D95C7A_100%)] text-white border-t border-white/20">
-  <nav class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    <ul class="grid grid-cols-4 gap-1">
-      <li><%= footer_nav_link_to home_path,t(".home"), icon: "home" %></li>
-      <li><%= footer_nav_link_to new_exercise_log_path,t(".record"),icon: "record" %></li>
-      <li><%= footer_nav_link_to groups_path  || "#",t(".group"),icon: "group" %></li>
-      <li><%= footer_nav_link_to mypage_path  || "#",t(".my_page"),icon: "my-page" %></li>
-    </ul>
-  </nav>
+<footer role="contentinfo">
+  <div class="mt-10 py-6 text-sm">
+    <nav class="max-w-5xl mx-auto px-4 flex flex-wrap items-center justify-center gap-4">
+      <%= link_to "利用規約", terms_path, class: "link hover:underline" %>
+      <span class="text-gray-400">・</span>
+      <%= link_to "プライバシーポリシー", privacy_path, class: "link hover:underline" %>
+      <span class="text-gray-400">・</span>
+
+      <% if defined?(contact_path) %>
+        <%= link_to "お問い合わせ", contact_path, class: "link hover:underline" %>
+      <% else %>
+        <%= link_to "お問い合わせ（準備中）", "（GoogleフォームURL）",
+                    class: "link hover:underline", target: :_blank, rel: "noopener" %>
+      <% end %>
+    </nav>
+    <p class="text-center text-xs text-gray-500 mt-3">
+      &copy; <%= Time.zone.now.year %> ヘルスノ陣
+    </p>
+  </div>
+
+  <div class="bg-[linear-gradient(180deg,#F192A5_0%,#D95C7A_100%)] text-white border-t border-white/20">
+    <nav class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <ul class="grid grid-cols-4 gap-1">
+        <li><%= footer_nav_link_to home_path, t(".home"),   icon: "home"   %></li>
+        <li><%= footer_nav_link_to new_exercise_log_path, t(".record"), icon: "record" %></li>
+        <li><%= footer_nav_link_to groups_path, t(".group"), icon: "group" %></li>
+        <li><%= footer_nav_link_to mypage_path, t(".my_page"), icon: "my-page" %></li>
+      </ul>
+    </nav>
+  </div>
+
 </footer>
