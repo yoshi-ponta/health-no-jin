@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   get :top,  to: "top#index"
   get :home, to: "home#index"
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  get "/privacy", to: "static_pages#privacy", as: :privacy
+  get "/terms",   to: "static_pages#terms",   as: :terms
+
+  get "up", to: "rails/health#show", as: :rails_health_check
 
   resource :mypage, only: [ :show, :edit, :update ]
 end
