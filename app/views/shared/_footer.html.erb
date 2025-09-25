@@ -1,16 +1,15 @@
 <footer role="contentinfo">
   <div class="mt-10 py-6 text-sm">
     <nav class="mx-auto px-3 flex flex-nowrap items-center justify-center gap-1 max-w-[300px] sm:max-w-md md:max-w-lg">
-      <%= link_to "利用規約", terms_path, class: "link hover:underline" %>
+      <%= link_to "利用規約", terms_path %>
       <span class="text-gray-400">・</span>
-      <%= link_to "プライバシーポリシー", privacy_path, class: "link hover:underline" %>
+      <%= link_to "プライバシーポリシー", privacy_path %>
       <span class="text-gray-400">・</span>
 
       <% if defined?(contact_path) %>
-        <%= link_to "お問い合わせ", contact_path, class: "link hover:underline" %>
+        <%= link_to "お問い合わせ", contact_path %>
       <% else %>
-        <%= link_to "お問い合わせ(準備中)", "（GoogleフォームURL）",
-                    class: "link hover:underline", target: :_blank, rel: "noopener" %>
+        <%= link_to "お問い合わせ(準備中)", "（GoogleフォームURL）", target: :_blank, rel: "noopener" %>
       <% end %>
     </nav>
     <p class="text-center text-xs text-gray-500 mt-3">
