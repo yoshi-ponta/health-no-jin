@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="light">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
@@ -8,15 +8,12 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= favicon_link_tag "favicon.png" %>
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
   <%= yield :head %>
 </head>
 
-<body class="min-h-[100dvh] flex flex-col
-             bg-[linear-gradient(180deg,#FDFBF7_0%,#FAF5E6_100%)]
-             text-[#2E2E2E]
-             selection:bg-[#333333] selection:text-[#FDFBF7]
-             pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+<body class="min-h-[100dvh] flex flex-col bg-base-100 text-base-content selection:bg-neutral selection:text-base-100 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
 
   <%= render "shared/header" %>
 
@@ -31,3 +28,4 @@
 
   <div class="h-[env(safe-area-inset-bottom)]"></div>
 </body>
+</html>

@@ -6,25 +6,15 @@
     <div class="text-3xl sm:text-4xl font-extrabold">🏯 城の画像置き場</div>
     <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
     </div>
-    <%= link_to "運動を記録する", new_exercise_log_path,
-  class: "mt-8 inline-flex items-center justify-center
-          px-6 h-12 rounded-2xl mx-auto
-          bg-blue-600 text-white font-bold hover:bg-blue-700
-          focus:outline-none focus:ring-4 focus:ring-blue-300
-          shadow-md hover:shadow-lg transition" %>
+    <%= link_to "運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
   </div>
 
 <% else %>
   <!-- HomeA,グループ未加入の場合 -->
   <div class="min-h-[60vh] grid place-items-center px-4">
     <div class="w-[min(420px,90vw)] text-center space-y-10">
-      <%= link_to "グループを作成", new_group_path,
-        class: "w-full h-14 text-lg font-bold rounded-2xl bg-blue-600 text-white hover:bg-blue-700
-                focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-md hover:shadow-lg transition block text-center leading-[3.5rem]" %>
-
-      <%= button_to "招待コードで参加（準備中）","#", disabled: true,
-        class: "w-full h-14 text-lg font-bold rounded-2xl bg-gray-100 text-gray-400
-              border border-gray-300 shadow-sm cursor-not-allowed" %>
+      <%= link_to "グループを作成", new_group_path, class: "btn btn-primary btn-lg w-full shadow" %>
+      <%= button_to "招待コードで参加（準備中）","#", disabled: true, class: "btn btn-outline btn-lg w-full" %>
     </div>
   </div>
 <% end %>
