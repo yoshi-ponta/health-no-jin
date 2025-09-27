@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_18_063927) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_27_073817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_18_063927) do
 
   create_table "exercise_logs", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "group_id"
+    t.bigint "group_id", null: false
     t.bigint "exercise_item_id", null: false
     t.integer "amount", null: false
     t.datetime "performed_at", null: false
