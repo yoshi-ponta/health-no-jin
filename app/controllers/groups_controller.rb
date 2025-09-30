@@ -1,6 +1,10 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @groups = current_user.groups.joins(:group_memberships).where(group_memberships: { left_at: nil }).order(created_at: :desc)
+  end
+
   def new
     @group = Group.new
   end
