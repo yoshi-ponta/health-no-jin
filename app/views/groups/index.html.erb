@@ -1,4 +1,13 @@
 <section class="container mx-auto max-w-screen-xl">
   <h1 class="text-xl font-bold mb-4">グループ</h1>
-  <p class="text-gray-600">ここにグループ一覧が表示されます。</p>
 </section>
+
+<% @groups.each do |group| %>
+  <h3><%= group.name %></h3>
+  <%= button_to "グループを抜ける",
+      group_membership_path(group),
+      method: :delete,
+      form: { data: { turbo: false } },
+      data: { turbo_confirm: "本当に退会しますか？" },
+      class: "btn btn-outline" %>
+<% end %>
