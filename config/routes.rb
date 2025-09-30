@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [ :index, :new, :create ] do
-      resource :membership, only: [:destroy]
+      resource :membership, only: [ :destroy ]
     end
 
     resources :exercise_logs, only: [ :index, :new, :create ]
