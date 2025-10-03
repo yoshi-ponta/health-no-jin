@@ -2,7 +2,7 @@
   "name": "app",
   "private": true,
   "devDependencies": {
-    "daisyui": "^5.1.18",
+    "daisyui": "^5.1.26",
     "esbuild": "^0.25.9"
   },
   "scripts": {
@@ -13,7 +13,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.16",
-    "@tailwindcss/cli": "^4.1.12",
-    "tailwindcss": "^4.1.12"
+    "@tailwindcss/cli": "^4.1.14",
+    "tailwindcss": "^4.1.14"
   }
 }
