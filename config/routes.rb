@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       root to: "home#index", as: :authenticated_root
     end
 
-    resources :groups, only: [ :index, :new, :create ] do
+    resources :groups, only: [ :index, :new, :create, :show ] do
       resource :membership, only: [ :destroy ]
     end
 
@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   # 開発用（直接アクセスしたい時用）
   get :top,  to: "top#index"
   get :home, to: "home#index"
+
+  get  "invite/:token", to: "invites#show",   as: :invite
+  post "invite/:token", to: "invites#accept", as: :accept_invite
 
   get "/privacy", to: "static_pages#privacy", as: :privacy
   get "/terms",   to: "static_pages#terms",   as: :terms

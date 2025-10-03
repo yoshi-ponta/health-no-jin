@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
           .first
       end
   end
+
+  def after_sign_in_path_for(resource)
+    if (token = session.delete(:pending_invite_token)).present?
+      invite_path(token: token)
+    else
+      super
+    end
+  end
 end

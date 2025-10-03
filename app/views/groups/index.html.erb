@@ -3,11 +3,38 @@
 </section>
 
 <% @groups.each do |group| %>
-  <h3><%= group.name %></h3>
-  <%= button_to "グループを抜ける",
-      group_membership_path(group),
-      method: :delete,
-      form: { data: { turbo: false } },
-      data: { turbo_confirm: "本当に退会しますか？" },
-      class: "btn btn-outline" %>
+  <div class="group-card">
+    <h3><%= link_to group.name, group_path(group) %></h3>
+    <p>現在 <%= group.users.count %> 人</p>
+
+    <% if group.owner_id == current_user.id && group.invite_token.present? %>
+      <div class="invite-block mt-2">
+        <p class="text-sm">
+          招待リンク：
+          <span class="font-mono break-all"><%= link_to invite_path(token: group.invite_token),invite_path(token: group.invite_token),class: "font-mono break-all underline" %></span>
+        </p>
+        <button
+          type="button"
+          data-copy="<%= invite_path(token: group.invite_token) %>"
+          onclick="(async (btn)=>{try{
+            await navigator.clipboard.writeText(btn.dataset.copy);
+            const old = btn.textContent; btn.textContent='コピーしました';
+            setTimeout(()=>btn.textContent=old||'コピー',1500);
+          }catch(e){
+            prompt('コピーできない場合は手動でコピーしてください', btn.dataset.copy);
+          }})(this)">
+          コピー
+        </button>
+      </div>
+    <% end %>
+
+    <%# unless group.owner_id == current_user.id %>  <!-- オーナーには退会ボタンを見せない。開発用にコメントアウト -->
+      <%= button_to "グループを抜ける",
+          group_membership_path(group),
+          method: :delete,
+          form: { data: { turbo: false } },
+          data: { turbo_confirm: "本当に退会しますか？" },
+          class: "btn btn-outline" %>
+    <%# end %>
+  </div>
 <% end %>
