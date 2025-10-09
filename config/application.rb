@@ -10,6 +10,8 @@ module Myapp
 
     config.autoload_lib(ignore: %w[assets tasks])
 
+    config.active_storage.variant_processor = :mini_magick
+
     config.i18n.default_locale = :ja
   end
 end
