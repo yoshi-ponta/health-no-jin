@@ -43,3 +43,32 @@ ja:
       last_attempt: "残り1回です。次に失敗するとアカウントがロックされます"
       timeout: "セッションの有効期限が切れました。もう一度ログインしてください"
 
+    passwords:
+      new:
+        title: "パスワードの再設定"
+        description: "ご登録のメールアドレスに、パスワード再設定用リンクをお送りします。"
+        email: "メールアドレス"
+        submit: "パスワード再設定用リンクを送信"
+        back_to_login: "ログイン画面に戻る"
+        errors_messages: "エラーがあります"
+      user:
+        send_instructions: "パスワード再設定用のメールを送信しました。"
+      updated: "パスワードを変更しました。"
+
+      edit:
+        title: "パスワードの再設定"
+        description: "新しいパスワードを入力してください。"
+        new_password: "新しいパスワード"
+        new_password_confirmation: "新しいパスワード（確認）"
+        min_length_hint: "(%{count}文字以上)"
+        submit: "パスワードを変更する"
+        back_to_login: "ログイン画面に戻る"
+
+    mailer:
+      reset_password_instructions:
+        subject: "パスワード再設定のご案内"
+        greeting: "%{email} 様"
+        intro: "パスワードの再設定のご依頼を受け付けました。以下のリンクから手続きを進めてください。"
+        action: "パスワードを再設定する"
+        ignore: "このメールにお心当たりがない場合は、本メールを破棄してください。"
+        note: "上記リンクにアクセスして新しいパスワードを設定するまで、パスワードは変更されません。"
