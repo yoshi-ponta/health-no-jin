@@ -52,7 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_132707) do
 
   create_table "exercise_logs", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "group_id"
+    t.bigint "group_id", null: false
     t.bigint "exercise_item_id", null: false
     t.integer "amount", null: false
     t.datetime "performed_at", null: false
@@ -77,10 +77,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_132707) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "owner_id", null: false
+    t.bigint "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "total_points", default: 0, null: false
     t.string "invite_token"
     t.index ["invite_token"], name: "index_groups_on_invite_token", unique: true
     t.index ["owner_id"], name: "index_groups_on_owner_id"

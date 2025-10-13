@@ -10,3 +10,14 @@ ja:
       record: "記録"
       group: "グループ"
       my_page: "マイページ"
+
+  activerecord:
+    attributes:
+      user:
+        reset_password_token: "パスワード再設定用リンク"
+    errors:
+      models:
+        user:
+          attributes:
+            reset_password_token:
+              invalid: "が不正です。リンクが無効か、すでに使用されています。"

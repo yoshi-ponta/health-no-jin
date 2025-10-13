@@ -1,16 +1,25 @@
-<h2>Forgot your password?</h2>
+<div class="min-h-[60svh] flex items-center justify-center px-4 py-4">
+  <div class="w-full max-w-[380px] md:max-w-[420px] mx-auto">
+    <h1 class="text-xl font-bold mb-3"><%= t(".title") %></h1>
+    <p class="text-sm text-base-content/70 mb-4"><%= t(".description") %></p>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_with model: resource,url: password_path(resource_name),data: { turbo: false } do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <label class="form-control w-full mb-3">
+        <div class="label mb-2">
+          <span class="label-text"><%= t(".email") %></span>
+        </div>
+        <%= f.email_field :email,autocomplete: "email",class: "input input-bordered w-full",placeholder: "sample@example.com" %>
+      </label>
+
+      <button type="submit" class="btn btn-primary btn-sm w-full opacity-90 hover:opacity-100 mt-4">
+        <%= t(".submit") %>
+      </button>
+    <% end %>
+
+    <div class="mt-3 text-sm">
+      <%= link_to t(".back_to_login"), new_user_session_path, class: "link" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
