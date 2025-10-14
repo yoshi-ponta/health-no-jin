@@ -2,7 +2,31 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @groups = current_user.groups.joins(:group_memberships).where(group_memberships: { left_at: nil }).order(created_at: :desc)
+    @group = current_user.groups
+      .joins(:group_memberships)
+      .where(group_memberships: { user_id: current_user.id, left_at: nil })
+      .limit(1)
+      .first
+
+    if @group
+      @members = @group.group_memberships
+        .preload(:user)
+        .where(left_at: nil)
+        .order(
+          Arel.sql("(group_memberships.user_id = #{@group.owner_id}) DESC, group_memberships.joined_at ASC")
+        )
+
+      @points_by_user = ExerciseLog
+      .joins(user: :group_memberships)
+      .where(group_memberships: { group_id: @group.id })
+      .where("exercise_logs.performed_at >= group_memberships.joined_at")
+      .where("group_memberships.left_at IS NULL OR exercise_logs.performed_at < group_memberships.left_at")
+      .group("group_memberships.user_id")
+      .sum(:points)
+    else
+      @members = []
+      @points_by_user = {}
+    end
   end
 
   def new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_08_132707) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_08_132707) do
     t.datetime "performed_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "points", default: 0, null: false
     t.index ["exercise_item_id"], name: "index_exercise_logs_on_exercise_item_id"
     t.index ["group_id"], name: "index_exercise_logs_on_group_id"
     t.index ["user_id"], name: "index_exercise_logs_on_user_id"

@@ -1,40 +1,73 @@
 <section class="container mx-auto max-w-screen-xl">
-  <h1 class="text-xl font-bold mb-4">グループ</h1>
-</section>
-
-<% @groups.each do |group| %>
-  <div class="group-card">
-    <h3><%= link_to group.name, group_path(group) %></h3>
-    <p>現在 <%= group.users.count %> 人</p>
-
-    <% if group.owner_id == current_user.id && group.invite_token.present? %>
-      <div class="invite-block mt-2">
-        <p class="text-sm">
-          招待リンク：
-          <span class="font-mono break-all"><%= link_to invite_path(token: group.invite_token),invite_path(token: group.invite_token),class: "font-mono break-all underline" %></span>
-        </p>
-        <button
-          type="button"
-          data-copy="<%= invite_path(token: group.invite_token) %>"
-          onclick="(async (btn)=>{try{
-            await navigator.clipboard.writeText(btn.dataset.copy);
-            const old = btn.textContent; btn.textContent='コピーしました';
-            setTimeout(()=>btn.textContent=old||'コピー',1500);
-          }catch(e){
-            prompt('コピーできない場合は手動でコピーしてください', btn.dataset.copy);
-          }})(this)">
-          コピー
-        </button>
+  <% if @group.nil? %>
+    <h1 class="text-xl font-bold mb-4">グループ</h1>
+    <div class="rounded-2xl border border-dashed p-8 text-center text-sm text-gray-500">
+      参加中のグループはありません
+      <div class="mt-3">
+        <%= link_to "グループを作成する", new_group_path, class: "underline" %>
       </div>
-    <% end %>
+    </div>
+  <% else %>
+    <div class="mb-4 flex items-center justify-between">
+      <h1 class="text-xl font-bold"><%= @group.name %> のメンバー</h1>
 
-    <%# unless group.owner_id == current_user.id %>  <!-- オーナーには退会ボタンを見せない。開発用にコメントアウト -->
-      <%= button_to "グループを抜ける",
-          group_membership_path(group),
-          method: :delete,
-          form: { data: { turbo: false } },
-          data: { turbo_confirm: "本当に退会しますか？" },
-          class: "btn btn-outline" %>
-    <%# end %>
-  </div>
-<% end %>
+      <% if @group.owner_id == current_user.id && @group.invite_token.present? %>
+        <details class="text-sm text-right">
+          <summary class="cursor-pointer select-none text-gray-700">招待リンクを表示</summary>
+          <div class="mt-1">
+            <span class="font-mono break-all underline">
+              <%= link_to invite_path(token: @group.invite_token),
+                          invite_path(token: @group.invite_token) %>
+            </span>
+            <button
+              type="button"
+              data-copy="<%= invite_path(token: @group.invite_token) %>"
+              onclick="(async (btn)=>{try{
+                await navigator.clipboard.writeText(btn.dataset.copy);
+                const old = btn.textContent; btn.textContent='コピーしました';
+                setTimeout(()=>btn.textContent=old||'コピー',1500);
+              }catch(e){
+                prompt('コピーできない場合は手動でコピーしてください', btn.dataset.copy);
+              }})(this)"
+              class="btn btn-outline btn-sm ml-2"
+            >コピー</button>
+          </div>
+        </details>
+      <% end %>
+    </div>
+
+    <% if @members.blank? %>
+      <div class="rounded-2xl border border-dashed p-8 text-center text-sm text-gray-500">
+        メンバーがいません
+      </div>
+    <% else %>
+      <ul class="space-y-2">
+        <% @members.each do |m| %>
+          <% u = m.user %>
+          <% is_owner = (u.id == @group.owner_id) %>
+          <% is_me    = (u.id == current_user.id) %>
+
+          <li class="grid grid-cols-[auto,1fr,auto] items-center gap-3 rounded-2xl p-3 shadow-sm bg-white">
+            <!-- 名前 -->
+            <div class="min-w-0">
+              <div class="text-sm font-medium truncate">
+                <%= u.name || u.email %>
+                <span class="ml-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold align-middle">
+                  <%= (@points_by_user[u.id] || 0) %> pt
+                </span>
+                <% if is_me %><span class="text-gray-500 text-xs">(あなた)</span><% end %>
+              </div>
+            </div>
+
+            <!-- 役割 -->
+            <div class="text-right space-y-1">
+              <% if is_owner %>
+                <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold">大将</span>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</section>
