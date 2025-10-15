@@ -2,9 +2,11 @@
   <!-- HomeB,グループ加入後 -->
   <div class="text-center">
     <div class="mt-10 sm:mt-14">
-    <%#= image_tag "castle.png", alt: "あなたの城", width: 200, height: 200 %>
-    <div class="text-3xl sm:text-4xl font-extrabold">🏯 城の画像置き場</div>
-    <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
+      <%# 合計ポイントに応じて城の画像を切り替え %>
+      <div class="text-3xl sm:text-4xl font-extrabold">
+        <%= image_tag castle_image_path_for(@group_total_points),alt: "あなたの城",class: "mx-auto",width: 200,height: 200 %>
+      </div>
+      <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
     </div>
     <%= link_to "運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
   </div>
