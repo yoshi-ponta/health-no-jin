@@ -2,11 +2,10 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @group_total_points =
-      if @active_group
-        @active_group.total_points
-      else
-        0
-      end
+    if @active_group
+      @progress = Progress::Builder.call(@active_group)
+    else
+      @progress = Progress::Dto.new(total_points: 0, progress_percent: 0, stage_limits: CastleHelper::CASTLE_LEVELS)
+    end
   end
 end

@@ -2,21 +2,35 @@
   <!-- HomeB,グループ加入後 -->
   <div class="text-center">
     <div class="mt-10 sm:mt-14">
-      <%# 合計ポイントに応じて城の画像を切り替え %>
-      <div class="text-3xl sm:text-4xl font-extrabold">
-        <%= image_tag castle_image_path_for(@group_total_points),alt: "あなたの城",class: "mx-auto",width: 200,height: 200 %>
+      <%= image_tag castle_image_path_for(@progress.total_points),alt: "城の画像",class: "mx-auto",width: 200, height: 200 %>
+
+      <% pb = progress_bar(@progress) %>
+
+      <div class="mt-6 mx-auto max-w-[600px]">
+        <div class="flex items-baseline justify-between mb-2">
+          <span class="text-sm text-gray-600">グループ合計</span>
+          <span class="text-sm font-semibold"><%= pb.total_points_label %></span>
+        </div>
+
+        <progress class="progress progress-primary w-full md:h-4 lg:h-6"value="<%= pb.percent %>" max="100"></progress>
+
+        <div class="mt-1 flex justify-between text-xs text-gray-500">
+          <span><%= pb.start_label %></span>
+          <span><%= pb.end_label %></span>
+        </div>
       </div>
+
       <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
     </div>
+
     <%= link_to "運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
   </div>
-
 <% else %>
   <!-- HomeA,グループ未加入の場合 -->
   <div class="min-h-[60vh] grid place-items-center px-4">
     <div class="w-[min(420px,90vw)] text-center space-y-10">
       <%= link_to "グループを作成", new_group_path, class: "btn btn-primary btn-lg w-full shadow" %>
-      <%= button_to "招待コードで参加（準備中）","#", disabled: true, class: "btn btn-outline btn-lg w-full" %>
+      <%= button_to "招待コードで参加（準備中）", "#", disabled: true, class: "btn btn-outline btn-lg w-full" %>
     </div>
   </div>
 <% end %>
