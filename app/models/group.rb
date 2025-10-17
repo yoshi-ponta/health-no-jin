@@ -20,4 +20,22 @@ class Group < ApplicationRecord
     logs = logs.where(performed_at: range) if range
     logs.sum(:points)
   end
+
+  def active_group
+    groups.first
+  end
+
+  def stage_limits
+    CastleHelper::CASTLE_LEVELS
+  end
+
+  def progress_percent
+    limits = stage_limits
+    total  = total_points.to_i
+    idx    = limits.rindex { |t| total >= t } || 0
+    start_pt, end_pt = limits[idx], limits[idx + 1]
+    return 100 if end_pt.nil? || end_pt <= start_pt
+
+    (((total - start_pt).fdiv(end_pt - start_pt)) * 100).floor.clamp(0, 100)
+  end
 end
