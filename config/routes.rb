@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
     resources :exercise_logs, only: [ :index, :new, :create ]
 
-    resources :notifications, only: [:index]
+    resources :notifications, only: [ :index ]
 
   root "top#index"
 

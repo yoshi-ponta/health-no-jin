@@ -5,7 +5,7 @@ class Cheer < ApplicationRecord
 
   before_validation :set_jst_date, if: -> { cheered_on.blank? }
   validates :group, :from_user, :to_user, :cheered_on, presence: true
-  validates :to_user_id, uniqueness: { scope: [:group_id, :from_user_id, :cheered_on] }
+  validates :to_user_id, uniqueness: { scope: [ :group_id, :from_user_id, :cheered_on ] }
 
   after_create_commit :notify_recipient
 
