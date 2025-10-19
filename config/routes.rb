@@ -1,21 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
 
-    # 未ログイン → / (Top)
     unauthenticated do
       root to: "top#index", as: :unauthenticated_root
     end
 
-    # ログイン済み → / (Home)
     authenticated :user do
       root to: "home#index", as: :authenticated_root
     end
 
     resources :groups, only: [ :index, :new, :create, :show ] do
       resource :membership, only: [ :destroy ]
+      resources :cheers, only: :create
     end
 
     resources :exercise_logs, only: [ :index, :new, :create ]
+
+    resources :notifications, only: [ :index ]
+
   root "top#index"
 
   # 開発用（直接アクセスしたい時用）

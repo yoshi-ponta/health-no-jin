@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_18_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cheers", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "from_user_id", null: false
+    t.bigint "to_user_id", null: false
+    t.date "cheered_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_user_id"], name: "index_cheers_on_from_user_id"
+    t.index ["group_id"], name: "index_cheers_on_group_id"
+    t.index ["to_user_id"], name: "index_cheers_on_to_user_id"
+  end
+
   create_table "exercise_items", force: :cascade do |t|
     t.string "name", null: false
     t.integer "base_points", null: false
@@ -52,7 +64,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
 
   create_table "exercise_logs", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "group_id", null: false
+    t.bigint "group_id"
     t.bigint "exercise_item_id", null: false
     t.integer "amount", null: false
     t.datetime "performed_at", null: false
@@ -78,9 +90,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "owner_id"
+    t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_points", default: 0, null: false
     t.string "invite_token"
     t.index ["invite_token"], name: "index_groups_on_invite_token", unique: true
     t.index ["owner_id"], name: "index_groups_on_owner_id"
@@ -89,6 +102,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
   create_table "messages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "actor_id", null: false
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.string "body"
+    t.datetime "read_at"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -112,10 +136,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_022254) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cheers", "groups"
+  add_foreign_key "cheers", "users", column: "from_user_id"
+  add_foreign_key "cheers", "users", column: "to_user_id"
   add_foreign_key "exercise_logs", "exercise_items"
   add_foreign_key "exercise_logs", "groups"
   add_foreign_key "exercise_logs", "users"
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "users", column: "owner_id", name: "fk_groups_owner_id", on_delete: :restrict
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "actor_id"
 end
