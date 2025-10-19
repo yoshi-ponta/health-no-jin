@@ -42,27 +42,35 @@
       </div>
     <% else %>
       <ul class="space-y-2">
-        <% @members.each do |m| %>
-          <% u = m.user %>
-          <% is_owner = (u.id == @group.owner_id) %>
-          <% is_me    = (u.id == current_user.id) %>
+        <% @members.each do |membership| %>
+          <% member_user = membership.user %>
+          <% is_owner = (member_user.id == @group.owner_id) %>
+          <% is_me    = (member_user.id == current_user.id) %>
 
           <li class="grid grid-cols-[auto,1fr,auto] items-center gap-3 rounded-2xl p-3 shadow-sm bg-white">
-            <!-- 名前 -->
             <div class="min-w-0">
               <div class="text-sm font-medium truncate">
-                <%= u.name || u.email %>
+              <%# 後で名前に変える #%>
+                <%= member_user[:email].to_s %>
                 <span class="ml-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold align-middle">
-                  <%= (@points_by_user[u.id] || 0) %> pt
+                  <%= (@points_by_user[member_user.id] || 0) %> pt
                 </span>
                 <% if is_me %><span class="text-gray-500 text-xs">(あなた)</span><% end %>
               </div>
             </div>
 
-            <!-- 役割 -->
             <div class="text-right space-y-1">
               <% if is_owner %>
                 <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold">大将</span>
+              <% end %>
+
+              <% unless is_me %>
+                <% cheered = Cheer.cheered_today?(group: @group, from_user: current_user, to_user: member_user) %>
+                <% if cheered %>
+                  <button class="btn btn-outline btn-xs" disabled>応援済み</button>
+                <% else %>
+                  <%= button_to "応援する",group_cheers_path(@group, to_user_id: member_user.id),method: :post,form: { data: { turbo: false } },class: "btn btn-primary btn-xs"%>
+                <% end %>
               <% end %>
             </div>
           </li>
