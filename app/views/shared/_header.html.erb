@@ -7,11 +7,13 @@
                   class: "text-sm font-medium text-gray-700 hover:text-black hover:underline underline-offset-4" %>
 
       <% if user_signed_in? %>
-        <%= button_to t(".logout"),
-                destroy_user_session_path,
-                method: :delete,
-                form: { class: "inline", "data-turbo": "false" },
-                class: "text-sm text-gray-600 hover:text-black bg-transparent p-0 underline" %>
+        <%= link_to notifications_path,
+            class: "relative inline-flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60",
+            aria: { label: "通知" } do %>
+          <%= image_tag "icons/bell.svg",class: "w-[22px] h-[22px] pointer-events-none select-none" %>
+        <% end %>
+
+        <%= button_to t(".logout"),destroy_user_session_path,method: :delete,form: { class: "inline", "data-turbo": "false" },class: "text-sm text-gray-600 hover:text-black bg-transparent p-0 underline" %>
       <% else %>
         <%= link_to t(".login") , new_user_session_path,
                     class: "text-sm text-gray-600 hover:text-black" %>
