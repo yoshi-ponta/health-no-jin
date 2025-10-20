@@ -50,8 +50,8 @@
           <li class="grid grid-cols-[auto,1fr,auto] items-center gap-3 rounded-2xl p-3 shadow-sm bg-white">
             <div class="min-w-0">
               <div class="text-sm font-medium truncate">
-              <%# 後で名前に変える #%>
-                <%= member_user[:email].to_s %>
+                <% display_name = member_user.name.presence || t(".display_name_fallback") %>
+                <%= display_name %>
                 <span class="ml-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold align-middle">
                   <%= (@points_by_user[member_user.id] || 0) %> pt
                 </span>
