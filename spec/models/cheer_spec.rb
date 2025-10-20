@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Cheer, type: :model do
-  let(:from_user) { User.create!(email: "from@example.com", password: "password1234") }
-  let(:to_user)   { User.create!(email: "to@example.com",   password: "password1234") }
+  let(:from_user) { User.create!(name: "From User", email: "from@example.com", password: "password1234") }
+  let(:to_user)   { User.create!(name: "To User",   email: "to@example.com",   password: "password1234") }
   let(:group)     { Group.create!(name: "テストグループ", owner: from_user) }
 
   def jst_today

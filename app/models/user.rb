@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  validates :name, presence: true
+
   has_many :owned_groups, class_name: "Group", foreign_key: "owner_id", dependent: :nullify
   has_many :group_memberships, dependent: :destroy
   has_many :exercise_logs, dependent: :destroy
