@@ -8,32 +8,12 @@
       </div>
     </div>
   <% else %>
-    <div class="mb-4 flex items-center justify-between">
-      <h1 class="text-xl font-bold"><%= @group.name %> のメンバー</h1>
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+      <h1 class="text-xl font-bold"><%= @group.name %> の加入メンバー</h1>
 
-      <% if @group.owner_id == current_user.id && @group.invite_token.present? %>
-        <details class="text-sm text-right">
-          <summary class="cursor-pointer select-none text-gray-700">招待リンクを表示</summary>
-          <div class="mt-1">
-            <span class="font-mono break-all underline">
-              <%= link_to invite_path(token: @group.invite_token),
-                          invite_path(token: @group.invite_token) %>
-            </span>
-            <button
-              type="button"
-              data-copy="<%= invite_path(token: @group.invite_token) %>"
-              onclick="(async (btn)=>{try{
-                await navigator.clipboard.writeText(btn.dataset.copy);
-                const old = btn.textContent; btn.textContent='コピーしました';
-                setTimeout(()=>btn.textContent=old||'コピー',1500);
-              }catch(e){
-                prompt('コピーできない場合は手動でコピーしてください', btn.dataset.copy);
-              }})(this)"
-              class="btn btn-outline btn-sm ml-2"
-            >コピー</button>
-          </div>
-        </details>
-      <% end %>
+      <div class="flex flex-wrap items-center justify-end gap-3">
+        <%= render "leave_dialog" %>
+      </div>
     </div>
 
     <% if @members.blank? %>
@@ -77,5 +57,6 @@
         <% end %>
       </ul>
     <% end %>
+    <%= render "invite_cta", group: @group %>
   <% end %>
 </section>

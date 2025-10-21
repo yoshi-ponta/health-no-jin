@@ -26,11 +26,22 @@
     <%= link_to "運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
   </div>
 <% else %>
-  <!-- HomeA,グループ未加入の場合 -->
-  <div class="min-h-[60vh] grid place-items-center px-4">
-    <div class="w-[min(420px,90vw)] text-center space-y-10">
-      <%= link_to "グループを作成", new_group_path, class: "btn btn-primary btn-lg w-full shadow" %>
-      <%= button_to "招待コードで参加（準備中）", "#", disabled: true, class: "btn btn-outline btn-lg w-full" %>
+  <!-- HomeA, グループ未加入の場合 -->
+<div class="hero min-h-[60vh]">
+  <div class="hero-content text-center">
+    <div class="card bg-base-100 border border-base-300 rounded-2xl shadow-xl w-[min(480px,92vw)]">
+      <div class="card-body items-center text-center space-y-6">
+        <h1 class="card-title text-lg md:text-xl">まずはグループ参加・作成しよう</h1>
+
+        <%= link_to "グループを作成", new_group_path,
+              class: "btn btn-lg w-full rounded-full bg-blue-900 hover:bg-blue-800 text-white border-none" %>
+
+        <p class="text-sm text-base-content/60">
+          ※グループに参加する場合は、リーダーから送られた<strong>招待リンク</strong>から参加してね！
+        </p>
+      </div>
     </div>
   </div>
+</div>
+
 <% end %>

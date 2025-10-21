@@ -11,16 +11,22 @@ class ApplicationController < ActionController::Base
   def set_active_group
     return unless current_user
 
+    active_groups = current_user.groups
+      .joins(:group_memberships)
+      .where(group_memberships: { left_at: nil })
     gid = session[:active_group_id]
-    @active_group =
-      if gid.present?
-        current_user.groups.find_by(id: gid)
-      else
-        current_user.groups
-          .joins(:group_memberships)
-          .where(group_memberships: { left_at: nil })
-          .first
-      end
+    if gid.present?
+      @active_group = active_groups.find_by(id: gid)
+      session.delete(:active_group_id) if @active_group.nil?
+    end
+
+    @active_group ||= active_groups.first
+  end
+
+  def require_active_group!
+    return if @active_group.present?
+
+    redirect_to authenticated_root_path, alert: "グループを作成または参加してください。" and return
   end
 
   def after_sign_in_path_for(resource)

@@ -1,7 +1,2 @@
 <h1><%= @group.name %></h1>
 <p>メンバー数：<%= @group.users.count %></p>
-
-<% if @group.owner_id == current_user.id && @group.invite_token.present? %>
-  <h2>招待リンク</h2>
-  <p><%= invite_path(token: @group.invite_token) %></p>
-<% end %>

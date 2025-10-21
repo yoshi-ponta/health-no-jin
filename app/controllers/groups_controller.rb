@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_active_group!, only: [ :index ]
 
   def index
     @group = current_user.groups
