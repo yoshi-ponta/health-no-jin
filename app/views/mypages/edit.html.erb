@@ -1,2 +1,48 @@
-<h1>Mypages#edit</h1>
-<p>Find me in app/views/mypages/edit.html.erb</p>
+<div class="max-w-3xl mx-auto space-y-8">
+  <header>
+    <h1 class="text-2xl font-bold">マイページ編集</h1>
+    <% if notice %><p class="mt-2 text-green-700"><%= notice %></p><% end %>
+    <% if alert %><p class="mt-2 text-red-700"><%= alert %></p><% end %>
+  </header>
+
+  <section id="profile" class="p-4 rounded-xl border">
+    <h2 class="text-xl font-semibold mb-3">プロフィール</h2>
+    <div class="flex items-center gap-4 mb-4">
+      <% if @user.respond_to?(:avatar) && @user.avatar.attached? %>
+        <%= image_tag @user.avatar.variant(resize_to_limit: [96,96]) rescue image_tag @user.avatar, size: "96x96" %>
+      <% else %>
+        <div class="w-24 h-24 rounded-full border grid place-items-center text-sm">No Image</div>
+      <% end %>
+      <div>
+        <div class="text-sm text-gray-600">ユーザー名</div>
+        <div class="font-medium"><%= @user.name %></div>
+      </div>
+    </div>
+    <div>
+      <div class="text-sm text-gray-600">プロフィール文</div>
+      <p class="whitespace-pre-line"><%= @user.try(:introduction) || "（未設定）" %></p>
+    </div>
+    <%= form_with url: profile_path, method: :patch, local: true do %>
+      <div class="mt-4 grid gap-2">
+        <%= label_tag :name, "ユーザー名" %>
+        <%= text_field_tag :name, @user.name, class: "border rounded p-2 w-full" %>
+        <%= label_tag :introduction, "プロフィール文" %>
+        <%= text_area_tag :introduction, @user.try(:introduction), rows: 4, class: "border rounded p-2 w-full" %>
+        <%= submit_tag "プロフィールを更新", class: "mt-2 border rounded px-3 py-2" %>
+      </div>
+    <% end %>
+
+    <h2 class="text-xl font-semibold mb-3">所属グループ</h2>
+    <% if @memberships.present? %>
+      <ul class="space-y-2">
+        <% @memberships.each do |m| %>
+          <li class="flex items-center justify-between p-3 rounded-lg border">
+            <span><%= m.group.name %></span>
+            <%= render "groups/leave_dialog", group: m.group %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-600">所属グループはありません。</p>
+    <% end %>
+  </section>
