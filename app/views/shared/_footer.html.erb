@@ -6,11 +6,7 @@
       <%= link_to "プライバシーポリシー", privacy_path %>
       <span class="text-gray-400">・</span>
 
-      <% if defined?(contact_path) %>
-        <%= link_to "お問い合わせ", contact_path %>
-      <% else %>
-        <%= link_to "お問い合わせ(準備中)", "（GoogleフォームURL）", target: :_blank, rel: "noopener" %>
-      <% end %>
+      <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScAH-rePh0qqit1iLmOiov63G9tvu7OWnnFX06Z7AvAgSDKjQ/viewform?usp=dialog", target: :_blank, rel: "noopener" %>
     </nav>
     <p class="text-center text-xs text-gray-500 mt-3">
       &copy; <%= Time.zone.now.year %> ヘルスノ陣
