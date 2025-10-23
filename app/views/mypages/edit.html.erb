@@ -8,8 +8,8 @@
   <section id="profile" class="p-4 rounded-xl border">
     <h2 class="text-xl font-semibold mb-3">プロフィール</h2>
     <div class="flex items-center gap-4 mb-4">
-      <% if @user.respond_to?(:avatar) && @user.avatar.attached? %>
-        <%= image_tag @user.avatar.variant(resize_to_limit: [96,96]) rescue image_tag @user.avatar, size: "96x96" %>
+      <% if @user.avatar.attached? && @user.avatar.blob&.persisted? %>
+        <%= image_tag @user.avatar.variant(resize_to_fill: [96, 96]), alt: "ユーザーアイコン", class: "w-24 h-24 rounded-full object-cover" %>
       <% else %>
         <div class="w-24 h-24 rounded-full border grid place-items-center text-sm">No Image</div>
       <% end %>
@@ -22,13 +22,24 @@
       <div class="text-sm text-gray-600">プロフィール文</div>
       <p class="whitespace-pre-line"><%= @user.try(:introduction) || "（未設定）" %></p>
     </div>
-    <%= form_with url: profile_path, method: :patch, local: true do %>
+    <%= form_with model: @user, url: profile_path, method: :patch, local: true, html: { multipart: true, data: { turbo: false } } do |f| %>
       <div class="mt-4 grid gap-2">
-        <%= label_tag :name, "ユーザー名" %>
-        <%= text_field_tag :name, @user.name, class: "border rounded p-2 w-full" %>
-        <%= label_tag :introduction, "プロフィール文" %>
-        <%= text_area_tag :introduction, @user.try(:introduction), rows: 4, class: "border rounded p-2 w-full" %>
-        <%= submit_tag "プロフィールを更新", class: "mt-2 border rounded px-3 py-2" %>
+        <%= f.label :name, "ユーザー名" %>
+        <%= f.text_field :name, class: "border rounded p-2 w-full" %>
+
+        <%= f.label :introduction, "プロフィール文" %>
+        <%= f.text_area :introduction, rows: 4, class: "border rounded p-2 w-full" %>
+
+        <%= f.label :avatar, "ユーザーアイコン" %>
+        <%= f.file_field :avatar, accept: "image/*", class: "border rounded p-2 w-full" %>
+
+        <% if @user.avatar.attached? %>
+          <label class="mt-1 inline-flex items-center gap-2 text-sm">
+            <%= f.check_box :remove_avatar, {}, "1", "0" %> アイコンを削除
+          </label>
+        <% end %>
+
+        <%= f.submit "プロフィールを更新", class: "mt-2 border rounded px-3 py-2" %>
       </div>
     <% end %>
 
