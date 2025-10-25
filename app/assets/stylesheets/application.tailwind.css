@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui"{themes: light --default, dark --prefersdark, luxury;}
 
 @theme {
   --font-serif: "Kaisei Decol", ui-serif, serif;
@@ -12,4 +12,16 @@
   --color-muted: var(--color-slate-600);
 
   --spacing-45: 11.25rem;
+}
+
+@layer base {
+  [data-theme="goldbtn"] {
+    --color-primary: #D4AF37;
+    --color-primary-content: #2b1b00;
+  }
+
+  [data-theme="pinkbtn"] {
+    --color-primary: #E75480;
+    --color-primary-content: #4b1f2c;
+  }
 }
