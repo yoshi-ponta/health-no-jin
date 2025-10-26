@@ -5,6 +5,7 @@ ja:
       logout: "ログアウト"
       logout_confirm: "ログアウトしますか？"
       guide: "ガイド"
+      notifications: "通知"
     footer:
       home: "ホーム"
       record: "記録"
