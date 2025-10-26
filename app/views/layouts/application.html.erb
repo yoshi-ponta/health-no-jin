@@ -42,7 +42,12 @@
   <%= yield :head %>
 </head>
 
-<body class="min-h-[100dvh] flex flex-col bg-base-100 text-base-content selection:bg-neutral selection:text-base-100 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+<body
+  class="min-h-[100dvh] flex flex-col bg-base-100 text-base-content bg-fixed"
+  style="background-image: url('<%= asset_path('background/washi.png') %>');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center">
 
   <%= render "shared/header" %>
 
