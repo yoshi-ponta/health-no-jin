@@ -1,0 +1,5 @@
+<%= form_with url: user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } do %>
+  <button type="submit" class="btn btn-primary">
+    <%= local_assigns[:label] || "Googleで続ける" %>
+  </button>
+<% end %>
