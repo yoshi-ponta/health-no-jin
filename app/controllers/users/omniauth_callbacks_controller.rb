@@ -1,8 +1,8 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    auth = request.env['omniauth.auth']
-    email = auth&.info&.email.presence || auth&.extra&.id_info&.[]('email').presence
-    return redirect_to(new_user_session_path, alert: 'Googleからメールアドレスを取得できませんでした。別のアカウントでお試しください。') unless email
+    auth = request.env["omniauth.auth"]
+    email = auth&.info&.email.presence || auth&.extra&.id_info&.[]("email").presence
+    return redirect_to(new_user_session_path, alert: "Googleからメールアドレスを取得できませんでした。別のアカウントでお試しください。") unless email
 
     email = email.strip.downcase
     provider = auth.provider
@@ -13,12 +13,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if (existing = User.find_by(email: email))
-      email_verified = auth&.info&.verified || auth&.info&.email_verified || auth&.extra&.id_info&.[]('email_verified')
+      email_verified = auth&.info&.verified || auth&.info&.email_verified || auth&.extra&.id_info&.[]("email_verified")
       if email_verified
         existing.update!(provider: provider, uid: uid)
         return success_sign_in(existing)
       else
-        return redirect_to new_user_session_path, alert: 'このメールは既に登録されています。パスワードでログイン後、設定画面からGoogle連携してください。'
+        return redirect_to new_user_session_path, alert: "このメールは既に登録されています。パスワードでログイン後、設定画面からGoogle連携してください。"
       end
     end
 
