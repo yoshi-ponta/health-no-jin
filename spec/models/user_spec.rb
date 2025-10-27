@@ -16,11 +16,13 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context "nameがないとき" do
-      it "無効である" do
-        user = build(:user, name: "")
-        expect(user).to be_invalid
-        expect(user.errors[:name]).to be_present
+    context "nameは任意である" do
+      it "空文字でも有効である" do
+        expect(build(:user, name: "")).to be_valid
+      end
+
+      it "nilでも有効である" do
+        expect(build(:user, name: nil)).to be_valid
       end
     end
   end
