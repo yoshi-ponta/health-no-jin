@@ -3,11 +3,11 @@
     <h1 class="text-xl font-bold mb-4"><%= t(".title") %></h1>
     <p class="text-sm text-gray-500 mb-6"><%= t(".description") %></p>
 
-    <%= form_with model: resource,scope: resource_name,url: registration_path(resource_name),method: :post,local: true,data: { turbo: false } do |f| %>
+    <%= form_with model: resource, scope: resource_name, url: registration_path(resource_name),
+                  method: :post, local: true, data: { turbo: false } do |f| %>
       <div class="mb-4">
         <%= f.label :name, t(".name"), class: "block text-sm mb-1" %>
-        <%= f.text_field :name,
-              autocomplete: "name", required: true,
+        <%= f.text_field :name, autocomplete: "name", required: true,
               class: "w-full rounded border px-3 py-2" %>
         <% if resource.errors[:name].present? %>
           <p class="mt-1 text-xs text-red-600"><%= resource.errors[:name].first %></p>
@@ -16,8 +16,7 @@
 
       <div class="mb-4">
         <%= f.label :email, t(".email"), class: "block text-sm mb-1" %>
-        <%= f.email_field :email,
-              autofocus: true, autocomplete: "email", required: true,
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,
               class: "w-full rounded border px-3 py-2" %>
         <% if resource.errors[:email].present? %>
           <p class="mt-1 text-xs text-red-600"><%= resource.errors[:email].first %></p>
@@ -29,8 +28,7 @@
           <%= f.label :password, t(".password"), class: "block text-sm mb-1" %>
           <span class="text-xs text-gray-400"><%= t(".password_hint") %></span>
         </div>
-        <%= f.password_field :password,
-              autocomplete: "new-password", required: true,
+        <%= f.password_field :password, autocomplete: "new-password", required: true,
               class: "w-full rounded border px-3 py-2" %>
         <% if resource.errors[:password].present? %>
           <p class="mt-1 text-xs text-red-600"><%= resource.errors[:password].first %></p>
@@ -39,16 +37,24 @@
 
       <div class="mb-4">
         <%= f.label :password_confirmation, t(".password_confirmation"), class: "block text-sm mb-1" %>
-        <%= f.password_field :password_confirmation,
-              autocomplete: "new-password", required: true,
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true,
               class: "w-full rounded border px-3 py-2" %>
         <% if resource.errors[:password_confirmation].present? %>
           <p class="mt-1 text-xs text-red-600"><%= resource.errors[:password_confirmation].first %></p>
         <% end %>
       </div>
 
-      <%= button_tag t(".submit"), type: "submit",class: "w-full rounded bg-black text-white py-2 font-semibold" %>
+      <%= button_tag t(".submit"), type: "submit",
+            class: "w-full rounded bg-black text-white py-2 font-semibold" %>
     <% end %>
+
+    <div class="my-6 flex items-center gap-3">
+      <hr class="grow border-gray-200">
+      <span class="text-xs text-gray-400">または</span>
+      <hr class="grow border-gray-200">
+    </div>
+
+    <%= render "shared/google_button", label: "Googleで新規登録" %>
 
     <div class="mt-4 text-sm">
       <%= t(".have_account") %>
