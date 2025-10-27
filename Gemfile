@@ -29,6 +29,10 @@ gem "mini_magick"
 gem "aws-sdk-s3", "~> 1.150"
 gem "image_processing"
 
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'dotenv-rails'
+
 gem "config"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1"
