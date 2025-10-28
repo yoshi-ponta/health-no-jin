@@ -1,0 +1,55 @@
+<%# app/views/exercise_logs/_category_card.html.erb %>
+<% modal_id = "m-#{key.to_s.parameterize}-modal" %>
+
+<button
+  type="button"
+  class="card bg-base-100 border shadow-sm rounded-2xl aspect-square w-full transition hover:shadow-md hover:-translate-y-0.5 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-warning/40 cursor-pointer"
+  data-modal-target="<%= modal_id %>"
+  aria-label="<%= name %> の種目を選択"
+  aria-haspopup="dialog"
+  aria-controls="<%= modal_id %>"
+  aria-expanded="false">
+  <div class="card-body p-3 sm:p-4 items-center text-center">
+    <div class="grid h-10 w-10 place-items-center rounded-full bg-base-200 text-lg"><%= icon %></div>
+    <div class="mt-2 font-semibold leading-tight truncate w-full"><%= name %></div>
+    <div class="badge badge-ghost text-[11px] mt-1">項目を選ぶ</div>
+  </div>
+</button>
+
+<dialog id="<%= modal_id %>" class="modal" aria-labelledby="label-<%= key %>">
+  <div class="modal-box max-w-sm">
+    <div class="flex items-center justify-between mb-2">
+      <h3 id="label-<%= key %>" class="font-bold text-base">
+        <span class="mr-1"><%= icon %></span><%= name %> の種目
+      </h3>
+      <form method="dialog"><button class="btn btn-ghost btn-xs" aria-label="閉じる">✕</button></form>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <% items.each do |it| %>
+        <button
+          type="button"
+          class="card bg-base-100 border shadow-sm rounded-xl p-2 text-center hover:shadow-md"
+          data-select-item
+          data-detail-key="<%= it[:detail_key] %>"
+
+          data-item-name="<%= it[:name] %>"
+          <% if it[:points] %> data-item-points="<%= it[:points] %>" <% end %>>
+          <div class="text-sm font-semibold truncate"><%= it[:name] %></div>
+          <% if it[:note].present? %>
+            <div class="text-[11px] text-gray-500 mt-0.5"><%= it[:note] %></div>
+          <% end %>
+        </button>
+      <% end %>
+    </div>
+
+    <div class="modal-action">
+      <button type="button" class="btn btn-primary btn-sm" data-record-submit>記録する</button>
+      <form method="dialog"><button class="btn btn-outline btn-sm">閉じる</button></form>
+    </div>
+  </div>
+
+  <form method="dialog" class="modal-backdrop">
+    <button aria-label="閉じる">閉じる</button>
+  </form>
+</dialog>

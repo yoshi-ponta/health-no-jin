@@ -4,14 +4,34 @@
     <p class="text-sm text-gray-600">今日の運動を記録しましょう。</p>
   </header>
 
-  <% if @exercise_log.errors.any? %>
-    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
-      入力エラーが <%= @exercise_log.errors.count %> 件あります。各項目の下のメッセージを確認してください。
-    </div>
-  <% end %>
+  <%= render "form", exercise_log: @exercise_log %>
 
-  <section class="rounded-2xl border shadow-sm p-4 sm:p-6 bg-white ">
-    <%= render "form", exercise_log: @exercise_log %>
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-gray-600">運動項目</h2>
+    <% categories = [
+      { key: :running, name: "有酸素運動", icon: "🏃‍♂️", items: [
+          { name: "ウォーキング", detail_key: "walking",  points: 5,  note: "5pt" },
+          { name: "ジョギング",   detail_key: "jogging",  points: 8,  note: "8pt" },
+          { name: "縄跳び",       detail_key: "jump_rope", points: 10, note: "10pt" },
+          { name: "階段",         detail_key: "stairs",    points: 4,  note: "4pt" },
+        ]},
+      { key: :pushup, name: "筋トレ", icon: "🧎", items: [
+          { name: "腕立て", detail_key: "pushup", points: 3, note: "3pt" },
+          { name: "スクワット", detail_key: "squat", points: 2, note: "2pt" },
+          { name: "腹筋", detail_key: "situp", points: 3, note: "3pt" },
+          { name: "背筋", detail_key: "back", points: 4, note: "4pt" },
+        ]},
+    ] %>
+
+    <div class="grid grid-cols-3 gap-3 sm:gap-4">
+      <% categories.each do |c| %>
+        <%= render "category_card",
+          key:   c[:key],
+          name:  c[:name],
+          icon:  c[:icon],
+          items: c[:items] %>
+      <% end %>
+    </div>
   </section>
 
   <div class="pt-2">
