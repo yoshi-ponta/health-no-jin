@@ -4,27 +4,20 @@
     <p class="text-sm text-gray-600">今日の運動を記録しましょう。</p>
   </header>
 
-  <%= render "form", exercise_log: @exercise_log %>
+  <%= form_with model: @exercise_log,
+              url: exercise_logs_path,
+              data: { turbo: false },
+              id: "exercise-log-form" do |f| %>
+  <%= f.hidden_field :exercise_item_id, id: "exercise_log_exercise_item_id" %>
+  <%= f.hidden_field :performed_at, id: "exercise_log_performed_at" %>
+<% end %>
 
   <section class="space-y-2">
     <h2 class="text-sm font-semibold text-gray-600">運動項目</h2>
-    <% categories = [
-      { key: :running, name: "有酸素運動", icon: "🏃‍♂️", items: [
-          { name: "ウォーキング", detail_key: "walking",  points: 5,  note: "5pt" },
-          { name: "ジョギング",   detail_key: "jogging",  points: 8,  note: "8pt" },
-          { name: "縄跳び",       detail_key: "jump_rope", points: 10, note: "10pt" },
-          { name: "階段",         detail_key: "stairs",    points: 4,  note: "4pt" },
-        ]},
-      { key: :pushup, name: "筋トレ", icon: "🧎", items: [
-          { name: "腕立て", detail_key: "pushup", points: 3, note: "3pt" },
-          { name: "スクワット", detail_key: "squat", points: 2, note: "2pt" },
-          { name: "腹筋", detail_key: "situp", points: 3, note: "3pt" },
-          { name: "背筋", detail_key: "back", points: 4, note: "4pt" },
-        ]},
-    ] %>
 
     <div class="grid grid-cols-3 gap-3 sm:gap-4">
-      <% categories.each do |c| %>
+      <% @exercise_categories.each do |c| %>
+        <% next if c[:items].blank? %>
         <%= render "category_card",
           key:   c[:key],
           name:  c[:name],
