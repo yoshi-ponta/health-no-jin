@@ -1,15 +1,16 @@
 ActiveRecord::Base.transaction do
-  [
-    { name: "歩く", base_points: 1 },
-    { name: "ストレッチ", base_points: 1 },
-    { name: "走る", base_points: 2 },
-    { name: "筋トレ", base_points: 3 }
-    # 追加の運動項目があればここに追記
-  ].each do |attrs|
-    ExerciseItem.find_or_create_by(name: attrs[:name]) do |item|
-      item.base_points = attrs[:base_points]
-    end
-  end
+  items = [
+    { name: "ウォーキング", base_points: 5 },
+    { name: "ジョギング",   base_points: 8 },
+    { name: "縄跳び",       base_points: 10 },
+    { name: "階段",         base_points: 4 },
+    { name: "腕立て",       base_points: 3 },
+    { name: "スクワット",   base_points: 2 },
+    { name: "腹筋",         base_points: 3 },
+    { name: "背筋",         base_points: 4 }
+  ]
 
-  puts "[seed] ExerciseItem count: #{ExerciseItem.count}"
+  items.each do |attrs|
+    ExerciseItem.find_or_initialize_by(name: attrs[:name]).update!(base_points: attrs[:base_points])
+  end
 end
