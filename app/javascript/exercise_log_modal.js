@@ -1,46 +1,72 @@
-(() => {
-  let bound = false;
+document.addEventListener("DOMContentLoaded", () => {
+  const SELECTED_CLASSES = ["border-primary", "ring-2", "ring-primary", "ring-offset-1"];
+  const form = document.getElementById("exercise-log-form");
 
-  function bind() {
-    if (bound) return;
-    bound = true;
-
-    document.addEventListener("click", (e) => {
-      const opener = e.target.closest("[data-modal-target]");
-      if (opener) {
-        const id  = opener.getAttribute("data-modal-target");
-        const dlg = id && document.getElementById(id);
-        if (dlg && typeof dlg.showModal === "function") {
-          dlg.showModal();
-          opener.setAttribute("aria-expanded", "true");
-
-          const onOutside = (ev) => {
-            const box = dlg.querySelector(".modal-box") || dlg.firstElementChild;
-            if (box && !box.contains(ev.target)) dlg.close();
-          };
-          const onClose = () => {
-            opener.setAttribute("aria-expanded", "false");
-            dlg.removeEventListener("click", onOutside);
-            dlg.removeEventListener("close", onClose);
-            try { opener.focus(); } catch {}
-          };
-
-          dlg.addEventListener("click", onOutside);
-          dlg.addEventListener("close", onClose);
-        }
-        return;
-      }
-
-      const closer = e.target.closest("[data-close-dialog]");
-      if (closer) {
-        const id  = closer.getAttribute("data-close-dialog");
-        const dlg = (id && document.getElementById(id)) || closer.closest("dialog");
-        if (dlg && typeof dlg.close === "function") dlg.close();
-        return;
-      }
-    }, { capture: true });
+  function resetDialog(dialog) {
+    const prev = dialog.querySelector('[data-select-item][aria-pressed="true"]');
+    if (prev) {
+      SELECTED_CLASSES.forEach((c) => prev.classList.remove(c));
+      prev.removeAttribute("aria-pressed");
+    }
+    const recordBtn = dialog.querySelector("[data-record-submit]");
+    if (recordBtn) recordBtn.disabled = true;
   }
 
-  document.addEventListener("turbo:load", bind);
-  document.addEventListener("DOMContentLoaded", bind);
-})();
+  function selectItem(button) {
+    const dialog = button.closest("dialog");
+    if (!dialog) return;
+    const prev = dialog.querySelector('[data-select-item][aria-pressed="true"]');
+    if (prev && prev !== button) {
+      SELECTED_CLASSES.forEach((c) => prev.classList.remove(c));
+      prev.removeAttribute("aria-pressed");
+    }
+    SELECTED_CLASSES.forEach((c) => button.classList.add(c));
+    button.setAttribute("aria-pressed", "true");
+    const recordBtn = dialog.querySelector("[data-record-submit]");
+    if (recordBtn) recordBtn.disabled = false;
+  }
+
+  function submitSelection(button) {
+    const dialog = button.closest("dialog");
+    if (!dialog || !form) return;
+    const selected = dialog.querySelector('[data-select-item][aria-pressed="true"]');
+    const itemId = selected?.dataset.exerciseItemId;
+    if (!itemId) return;
+
+    const idInput = form.querySelector('input[name="exercise_log[exercise_item_id]"]');
+    if (idInput) idInput.value = itemId;
+
+    if (typeof form.requestSubmit === "function") form.requestSubmit();
+    else form.submit();
+
+    dialog.close();
+  }
+
+  document.addEventListener("click", (e) => {
+    const opener = e.target.closest("[data-modal-target]");
+    if (opener) {
+      const dlg = document.getElementById(opener.dataset.modalTarget);
+      if (dlg) { resetDialog(dlg); dlg.showModal(); }
+      return;
+    }
+
+    const selectButton = e.target.closest("[data-select-item]");
+    if (selectButton) {
+      selectItem(selectButton);
+      return;
+    }
+
+    const recordButton = e.target.closest("[data-record-submit]");
+    if (recordButton) {
+      submitSelection(recordButton);
+      return;
+    }
+
+    const closer = e.target.closest("[data-close-dialog]");
+    if (closer) {
+      const dlg = document.getElementById(closer.dataset.closeDialog) || closer.closest("dialog");
+      if (dlg) dlg.close();
+      return;
+    }
+  });
+}, { once: true });
