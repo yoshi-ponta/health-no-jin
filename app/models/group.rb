@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   belongs_to :owner, class_name: "User", optional: false
   has_many :group_memberships, dependent: :destroy
   has_many :users, through: :group_memberships
+  has_many :exercise_logs, dependent: :nullify
 
   validates :name, presence: true, length: { maximum: 50 }
 
@@ -19,10 +20,6 @@ class Group < ApplicationRecord
 
     logs = logs.where(performed_at: range) if range
     logs.sum(:points)
-  end
-
-  def active_group
-    groups.first
   end
 
   def stage_limits
