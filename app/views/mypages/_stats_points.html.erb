@@ -1,0 +1,43 @@
+    <h2>直近30日のポイント推移</h2>
+    <div style="height: 300px;">
+      <canvas id="pointsChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      fetch('/stats/points/daily?days=30')
+        .then(res => res.json())
+        .then(data => {
+          const labelsFull = data.map(d => d.date);
+          const labelsDay  = labelsFull.map(s => s.slice(8));
+          const values     = data.map(d => d.daily);
+
+          const ctx = document.getElementById('pointsChart').getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labelsDay,
+              datasets: [{
+                label: 'ポイント',
+                data: values,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(37, 99, 235, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    title: (items) => labelsFull[items[0].dataIndex],
+                    label: (ctx) => `${ctx.parsed.y ?? 0} pt`
+                  }
+                }
+              }
+            }
+          });
+        })
+        .catch(err => console.error('データ取得エラー:', err));
+    </script>
