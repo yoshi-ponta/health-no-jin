@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get :top,  to: "top#index"
   get :home, to: "home#index"
 
+  get "stats/points/daily", to: "stats/points#daily", defaults: { format: :json }
+
   get  "invite/:token", to: "invites#show",   as: :invite
   post "invite/:token", to: "invites#accept", as: :accept_invite
 
