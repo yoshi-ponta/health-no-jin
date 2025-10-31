@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja" data-theme="light">
 <head>
+  <%= display_meta_tags(default_meta_tags) %>
+
 <%# Google Analytics 後でターボに統一する%>
   <% if Rails.env.production? && ENV["GA_MEASUREMENT_ID"].present? %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["GA_MEASUREMENT_ID"] %>"></script>
