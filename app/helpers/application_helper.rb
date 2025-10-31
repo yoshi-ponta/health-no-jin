@@ -23,24 +23,24 @@ module ApplicationHelper
   def default_meta_tags
     image_for_ogp = image_url("ogp/default_ogp.png")
     base = {
-      site: 'Health-no-Jin',
-      title: 'ヘルスノ陣',
+      site: "Health-no-Jin",
+      title: "ヘルスノ陣",
       reverse: true,
-      charset: 'utf-8',
-      description: 'ヘルスノ陣は、家族や友人とグループを作り、毎日の運動をポイント化！集めたポイントで「城」を育てながら、楽しく健康寿命を延ばす為のサービスです。',
+      charset: "utf-8",
+      description: "ヘルスノ陣は、家族や友人とグループを作り、毎日の運動をポイント化！集めたポイントで「城」を育てながら、楽しく健康寿命を延ばす為のサービスです。",
       canonical: request.original_url,
-      separator: '｜',
+      separator: "｜",
       og: {
-        site_name: 'ヘルスノ陣',
+        site_name: "ヘルスノ陣",
         title: :title,
         description: :description,
-        type: 'website',
+        type: "website",
         url: request.original_url,
         image: image_for_ogp,
-        locale: 'ja_JP'
+        locale: "ja_JP"
       },
       twitter: {
-        card: 'summary',
+        card: "summary",
         image: image_for_ogp
       }
     }
