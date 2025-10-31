@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+/public/ogp/
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -44,3 +45,4 @@ package-lock.json
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+*.deb
