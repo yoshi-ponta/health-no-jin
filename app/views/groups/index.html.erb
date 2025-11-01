@@ -9,7 +9,7 @@
     </div>
   <% else %>
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-      <h1 class="text-xl font-bold"><%= @group.name %> の加入メンバー</h1>
+      <h1 class="text-xl font-bold"><%= @group.name %> の陣営</h1>
 
       <div class="flex flex-wrap items-center justify-end gap-3">
         <%= render "leave_dialog" %>
@@ -28,35 +28,49 @@
           <% is_me    = (member_user.id == current_user.id) %>
 
           <li class="grid grid-cols-[auto,1fr,auto] items-center gap-3 rounded-2xl p-3 shadow-sm bg-white">
-            <div class="min-w-0">
+            <div class="min-w-0 flex flex-col col-span-2">
               <div class="text-sm font-medium truncate">
                 <% display_name = member_user.name.presence || t(".display_name_fallback") %>
                 <%= display_name %>
-                <span class="ml-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold align-middle">
-                  <%= (@points_by_user[member_user.id] || 0) %> pt
-                </span>
                 <% if is_me %><span class="text-gray-500 text-xs">(あなた)</span><% end %>
               </div>
-            </div>
 
-            <div class="text-right space-y-1">
-              <% if is_owner %>
-                <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold">大将</span>
-              <% end %>
+              <div class="mt-1 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <%= user_avatar_tag(member_user) %>
+                  <span class="ml-5 px-2 py-1 rounded-full bg-amber-100 text-amber-800 leading-none inline-flex items-baseline">
+                    <span class="text-xl font-bold tabular-nums leading-none">
+                      <%= (@points_by_user[member_user.id] || 0) %>
+                    </span>
+                    <span class="ml-1 text-xs font-semibold align-baseline">pt</span>
+                  </span>
+                </div>
 
-              <% unless is_me %>
-                <% cheered = Cheer.cheered_today?(group: @group, from_user: current_user, to_user: member_user) %>
-                <% if cheered %>
-                  <button class="btn btn-outline btn-xs" disabled>応援済み</button>
-                <% else %>
-                  <%= button_to "応援する",group_cheers_path(@group, to_user_id: member_user.id),method: :post,form: { data: { turbo: false } },class: "btn btn-primary btn-xs"%>
-                <% end %>
-              <% end %>
+                <div class="flex items-center gap-2">
+                  <% unless is_me %>
+                    <% cheered = Cheer.cheered_today?(group: @group, from_user: current_user, to_user: member_user) %>
+                    <% if cheered %>
+                      <button data-theme="pinkbtn" class="btn btn-primary text-base px-4 h-9 rounded-2xl leading-none" disabled>応援済み</button>
+                    <% else %>
+                      <%= button_to "応援する",
+                            group_cheers_path(@group, to_user_id: member_user.id),
+                            method: :post,
+                            form: { data: { turbo: false } },
+                            class: "btn btn-primary text-base px-4 h-9 rounded-2xl leading-none",
+                            data: { theme: "pinkbtn" } %>
+                    <% end %>
+                    <% if is_owner %>
+                    <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold leading-none">大将</span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </li>
         <% end %>
       </ul>
     <% end %>
+
     <%= render "invite_cta", group: @group %>
   <% end %>
 </section>
