@@ -5,12 +5,18 @@
 
     <%= form_with scope: :user, url: user_session_path, method: :post, local: true, data: { turbo: false } do |f| %>
       <div class="mb-4">
-        <%= f.label :email, t(".email"), class: "block text-sm mb-1" %>
+        <%= f.label :email, class: "block text-sm mb-1 inline-flex items-center gap-1" do %>
+          <span><%= t(".email") %></span>
+          <span class="text-red-600">*</span>
+        <% end %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "w-full rounded border px-3 py-2" %>
       </div>
 
       <div class="mb-4">
-        <%= f.label :password, t(".password"), class: "block text-sm mb-1" %>
+        <%= f.label :password, class: "block text-sm mb-1 inline-flex items-center gap-1" do %>
+          <span><%= t(".password") %></span>
+          <span class="text-red-600">*</span>
+        <% end %>
         <%= f.password_field :password, autocomplete: "current-password", required: true, class: "w-full rounded border px-3 py-2" %>
       </div>
 
