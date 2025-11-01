@@ -8,16 +8,13 @@
   <section id="profile" class="p-4 rounded-xl border">
     <h2 class="text-xl font-semibold mb-3">プロフィール</h2>
     <div class="flex items-center gap-4 mb-4">
-      <% if @user.avatar.attached? && @user.avatar.blob&.persisted? %>
-        <%= image_tag @user.avatar.variant(resize_to_fill: [96, 96]), alt: "ユーザーアイコン", class: "w-24 h-24 rounded-full object-cover" %>
-      <% else %>
-        <div class="w-24 h-24 rounded-full border grid place-items-center text-sm">No Image</div>
-      <% end %>
+      <%= user_avatar_tag(@user, size: 96, class_name: "ring-1") %>
       <div>
         <div class="text-sm text-gray-600">ユーザー名</div>
         <div class="font-medium"><%= @user.name %></div>
       </div>
     </div>
+
     <div>
       <div class="text-sm text-gray-600">プロフィール文</div>
       <p class="whitespace-pre-line"><%= @user.try(:introduction) || "（未設定）" %></p>

@@ -1,6 +1,17 @@
-<h1><%= @group.name %> に参加しますか？</h1>
-
-<%= button_to "このグループに参加する",
-    accept_invite_path(token: params[:token]),
-    method: :post,
-    form: { data: { turbo: false } } %>
+<div class="grid place-items-center min-h-[60vh]">
+  <div class="card w-full max-w-md shadow-xl bg-base-100">
+    <div class="card-body items-center text-center">
+      <h1 class="card-title text-2xl font-bold">
+        <%= @group.name %> に加入しますか？
+      </h1>
+      <div class="card-actions justify-center mt-4">
+        <%= button_to "このグループに加入する",
+              accept_invite_path(token: params[:token]),
+              method: :post,
+              form: { data: { turbo: false }, class: "inline-block" },
+              class: "btn btn-primary btn-lg btn-wide rounded-2xl",
+              data: { theme: "pinkbtn" } %>
+      </div>
+    </div>
+  </div>
+</div>
