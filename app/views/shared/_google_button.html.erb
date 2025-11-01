@@ -1,5 +1,18 @@
-<%= form_with url: user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } do %>
-  <button type="submit" class="btn btn-primary">
-    <%= local_assigns[:label] || "Googleで続ける" %>
-  </button>
+<%= button_to user_google_oauth2_omniauth_authorize_path,
+              method: :post,
+              form: { data: { turbo: false }, class: "w-full max-w-xl mx-auto" },
+              class: "w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded border border-[#dadce0]
+                      bg-white text-[#3c4043] font-semibold
+                      hover:shadow-sm hover:border-gray-300 active:shadow-inner
+                      focus:outline-none focus:ring-2 focus:ring-[#1a73e8]
+                      transition no-underline",
+              data: { disable_with: "Googleで続ける…" },
+              aria: { label: "Googleで続ける" } do %>
+  <svg class="w-5 h-5" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+    <path fill="#EA4335" d="M9 3.48c1.26 0 2.39.44 3.28 1.3l2.46-2.46A8.04 8.04 0 0 0 9 1a8 8 0 0 0-7.08 4.15l2.8 2.17C5.3 5.46 6.99 3.48 9 3.48z"/>
+    <path fill="#4285F4" d="M17 9.2c0-.55-.05-1.08-.14-1.6H9v3.03h4.5c-.19 1-.77 1.84-1.64 2.39l2.53 1.96C16.2 13.55 17 11.54 17 9.2z"/>
+    <path fill="#FBBC05" d="M4.72 10.01a5.47 5.47 0 0 1 0-2.02l-2.8-2.17a8 8 0 0 0 0 6.36l2.8-2.17z"/>
+    <path fill="#34A853" d="M9 17c2.16 0 3.97-.71 5.29-1.93l-2.53-1.96c-.7.47-1.6.76-2.76.76-2.01 0-3.7-1.98-4.28-3.84l-2.8 2.17A8 8 0 0 0 9 17z"/>
+  </svg>
+  <span>Googleで続ける</span>
 <% end %>
