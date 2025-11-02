@@ -34,8 +34,7 @@ Rails.application.routes.draw do
 
   get "up", to: "rails/health#show", as: :rails_health_check
 
-  resource :mypage, only: [ :show, :edit ]
-  resource :profile, only: [ :update ]
+  resource :mypage, only: [ :show, :edit, :update ]
 
   if Rails.env.development?
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
