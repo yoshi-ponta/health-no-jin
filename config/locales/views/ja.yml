@@ -26,3 +26,25 @@ ja:
   groups:
     index:
       display_name_fallback: "名無し"
+
+  categories:
+    running:   "有酸素運動"
+    running2:  "有酸素運動（高強度）"
+    pushup:    "筋トレ"
+    pushup2:   "筋トレ（高強度）"
+    stretch:   "ストレッチ"
+    stretch2:  "ストレッチ2"
+    daily:     "暮らしの活動"
+    recovery:  "セルフケア"
+    sports:    "スポーツ"
+
+  category_icons:
+    running:   "🚶‍♂️‍➡️"
+    running2:  "🏃"
+    pushup:    "💪"
+    pushup2:   "🏋️"
+    stretch:   "🧘‍♀️"
+    stretch2:  "🧘"
+    daily:     "🌿"
+    recovery:  "💆‍♂️"
+    sports:    "🏊‍♀️"
