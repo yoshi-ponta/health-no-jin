@@ -7,7 +7,7 @@
 
   <!-- プロフィール -->
   <section id="profile" class="p-4 rounded-xl bg-amber-50 shadow-md">
-    <h2 class="text-xl font-semibold mb-3">あなたの情報</h2>
+    <h2 class="text-xl font-semibold mb-3">プロフィール</h2>
 
     <div class="flex items-center gap-4 mb-4">
       <%= user_avatar_tag(@user, size: 96, class_name: "ring-1") %>
@@ -15,7 +15,7 @@
         <div class="text-sm text-gray-600">名前</div>
         <div class="text-xl font-bold sm:text-2xl"><%= @user.name %></div>
       </div>
-      <%= link_to "情報の編集", edit_mypage_path, class: "btn btn-outline btn-sm ml-auto" %>
+      <%= link_to "プロフィールの編集", edit_mypage_path, class: "btn btn-outline btn-sm ml-auto" %>
     </div>
 
     <div>
@@ -43,7 +43,7 @@
 
   <!-- 運動記録グラフ -->
   <section id="stats" class="p-4 rounded-xl bg-amber-50 shadow-md">
-  <h2 class="text-xl font-semibold mb-3 text-center">鍛錬の記録</h2>
+  <h2 class="text-xl font-semibold mb-3 text-center">運動の記録</h2>
   <%= render "mypages/stats_points",
         days: 30, height_px: 300,
         chart_id: "pointsChart",

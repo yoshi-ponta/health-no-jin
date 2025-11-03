@@ -23,7 +23,7 @@ ja:
       updated: "アカウント情報を更新しました"
       destroyed: "アカウントを削除しました"
       new:
-        name: "名前"
+        name: "名前(ニックネーム)"
         title: "新規登録"
         description: "名前とメールアドレス・パスワードを入力してください。"
         email: "メールアドレス"

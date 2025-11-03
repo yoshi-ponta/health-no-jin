@@ -1,4 +1,8 @@
-// Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./exercise_log_modal"
+import { bindPasswordVisibility } from "./password_visibility";
+
+document.addEventListener("turbo:load", () => {
+  bindPasswordVisibility(document);
+});
