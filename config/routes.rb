@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
 
     resources :exercise_logs, only: [ :index, :new, :create ]
-    resources :exercise_items, only: [:index]
+    resources :exercise_items, only: [ :index ]
 
     resources :notifications, only: [ :index ]
 

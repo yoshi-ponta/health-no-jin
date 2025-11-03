@@ -8,7 +8,7 @@ class NormalizeExerciseItemCategoryKeys < ActiveRecord::Migration[8.0]
     "ストレッチ2"          => "stretch2",
     "暮らしの活動"         => "daily",
     "セルフケア"           => "recovery",
-    "スポーツ"             => "sports",
+    "スポーツ"             => "sports"
   }.freeze
 
   def up

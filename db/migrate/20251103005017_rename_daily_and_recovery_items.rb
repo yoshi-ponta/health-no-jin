@@ -6,7 +6,7 @@ class RenameDailyAndRecoveryItems < ActiveRecord::Migration[8.0]
         "cleaning"         => { detail_key: "housework",        name: "家事" },
         "taking_out_trash" => { detail_key: "shopping_outing",  name: "買い物・外出" },
         "laundry"          => { detail_key: "work_activity",    name: "仕事" },
-        "cooking"          => { detail_key: "hydration",        name: "水分補給" },
+        "cooking"          => { detail_key: "hydration",        name: "水分補給" }
       }
       map.each do |from_key, to|
         tmp = "__renaming__#{from_key}"
@@ -25,7 +25,7 @@ class RenameDailyAndRecoveryItems < ActiveRecord::Migration[8.0]
         "housework"        => { detail_key: "cleaning",         name: "掃除" },
         "shopping_outing"  => { detail_key: "taking_out_trash", name: "ゴミ出し" },
         "work_activity"    => { detail_key: "laundry",          name: "洗濯干し" },
-        "hydration"        => { detail_key: "cooking",          name: "料理" },
+        "hydration"        => { detail_key: "cooking",          name: "料理" }
       }
 
       rev_map.each do |from_key, to|
