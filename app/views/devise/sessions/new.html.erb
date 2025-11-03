@@ -4,7 +4,6 @@
     <p class="text-sm text-gray-500 mb-6"><%= t(".description") %></p>
 
     <%= form_with scope: :user, url: user_session_path, method: :post, local: true, data: { turbo: false } do |f| %>
-
       <div class="mb-4">
         <%= f.label :email, class: "block text-sm mb-1" do %>
           <span><%= t(".email") %></span>
@@ -18,9 +17,15 @@
         <% end %>
 
         <div class="relative">
-          <%= f.password_field :password, id: "session_password", autocomplete: "current-password", class: "w-full rounded border px-3 py-2 pr-10" %>
+          <%= f.password_field :password,
+                id: "user_password",
+                autocomplete: "current-password",
+                class: "w-full rounded border px-3 py-2 pr-10" %>
 
-          <button type="button" class="absolute inset-y-0 right-2 my-auto p-2 text-black" data-eye-toggle data-eye-target="session_password">
+          <button type="button"
+                  class="absolute inset-y-0 right-2 my-auto p-2 text-black"
+                  data-eye-toggle
+                  data-eye-target="user_password">
             <span data-eye-show><%= render "shared/icon_eye", class_name: "h-5 w-5" %></span>
             <span data-eye-hide class="hidden"><%= render "shared/icon_eye_off", class_name: "h-5 w-5" %></span>
           </button>
