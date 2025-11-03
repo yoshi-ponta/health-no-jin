@@ -47,6 +47,9 @@
                 </div>
 
                 <div class="flex items-center gap-2">
+                  <% if is_owner %>
+                    <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold leading-none">大将</span>
+                  <% end %>
                   <% unless is_me %>
                     <% cheered = Cheer.cheered_today?(group: @group, from_user: current_user, to_user: member_user) %>
                     <% if cheered %>
@@ -58,9 +61,6 @@
                             form: { data: { turbo: false } },
                             class: "btn btn-primary text-base px-4 h-9 rounded-2xl leading-none",
                             data: { theme: "pinkbtn" } %>
-                    <% end %>
-                    <% if is_owner %>
-                    <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold leading-none">大将</span>
                     <% end %>
                   <% end %>
                 </div>
