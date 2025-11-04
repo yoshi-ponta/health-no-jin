@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "your-app.onrender.com", protocol: "https" }
+  config.action_mailer.default_url_options = { host: "health-no-jin.onrender.com", protocol: "https" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.raise_delivery_errors = true
@@ -69,8 +69,14 @@ Rails.application.configure do
     user_name:            ENV["SMTP_USER_NAME"],
     password:             ENV["SMTP_PASSWORD"],
     authentication:       ENV["SMTP_AUTHENTICATION"],
-    enable_starttls_auto: ENV["SMTP_ENABLE_STARTTLS_AUTO"] == "true"
+    enable_starttls_auto: ENV["SMTP_ENABLE_STARTTLS_AUTO"] == "true",
+    open_timeout:         10,
+    read_timeout:         10
   }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
