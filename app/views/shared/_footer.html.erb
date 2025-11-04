@@ -1,19 +1,20 @@
 <footer role="contentinfo">
-  <div class="mt-10 py-6 text-sm">
+  <div class="mt-10 py-6 text-[11px] sm:text-sm">
     <nav class="mx-auto px-3 flex flex-nowrap items-center justify-center gap-1 max-w-[300px] sm:max-w-md md:max-w-lg">
-      <%= link_to "利用規約", terms_path %>
+      <%= link_to "利用規約", terms_path, class: "whitespace-nowrap break-keep leading-none"%>
       <span class="text-gray-400">・</span>
-      <%= link_to "プライバシーポリシー", privacy_path %>
+      <%= link_to "プライバシーポリシー", privacy_path, class: "whitespace-nowrap break-keep leading-none"%>
       <span class="text-gray-400">・</span>
 
-      <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScAH-rePh0qqit1iLmOiov63G9tvu7OWnnFX06Z7AvAgSDKjQ/viewform?usp=dialog", target: :_blank, rel: "noopener" %>
+      <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScAH-rePh0qqit1iLmOiov63G9tvu7OWnnFX06Z7AvAgSDKjQ/viewform?usp=dialog", target: :_blank, rel: "noopener",
+          class: "whitespace-nowrap break-keep leading-none" %>
     </nav>
     <p class="text-center text-xs text-gray-500 mt-3">
       &copy; <%= Time.zone.now.year %> ヘルスノ陣
     </p>
   </div>
 
-  <div data-theme="appbar"class="bg-gradient-to-t from-[var(--from)] to-[var(--to)] border-t border-accent/40">
+  <div data-theme="appbar" class="bg-gradient-to-t from-[var(--from)] to-[var(--to)] border-t border-accent/40">
     <nav class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <ul class="grid grid-cols-4 gap-1">
         <li><%= footer_nav_link_to home_path, t(".home"),   icon: "home"   %></li>

@@ -16,9 +16,9 @@
         <% end %>
 
         <%= button_to destroy_user_session_path, method: :delete, form: { class: "inline", data: { turbo: false } },
-          class: "inline-flex flex-col items-center justify-center w-12 h-14 gap-[2px] text-gray-700 hover:text-black bg-transparent p-0" do %>
+          class: "inline-flex flex-col items-center justify-center w-14 h-14 gap-[2px] text-gray-700 hover:text-black bg-transparent p-0" do %>
           <%= image_tag "icons/sign-out.svg", class: "w-5 h-5 select-none pointer-events-none", alt: "" %>
-          <span class="text-[10px] leading-none tracking-wide"><%= t(".logout") %></span>
+          <span class="text-[9px] leading-none whitespace-nowrap break-keep"><%= t(".logout") %></span>
         <% end %>
 
       <% else %>
