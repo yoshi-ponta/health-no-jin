@@ -1,20 +1,49 @@
 <% if @active_group.present? %>
   <!-- HomeB,グループ加入後 -->
+
   <div class="text-center">
     <div class="mt-10 sm:mt-14">
-    <%#= image_tag "castle.png", alt: "あなたの城", width: 200, height: 200 %>
-    <div class="text-3xl sm:text-4xl font-extrabold">🏯 城の画像置き場</div>
-    <p class="mt-2 text-base">グループ名：<%= @active_group.name %></p>
-    </div>
-    <%= link_to "運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
-  </div>
+      <h2 class="text-center text-xl md:text-2xl font-bold tracking-tight">
+        <span class="block mx-auto truncate max-w-[80vw] md:max-w-[600px]">
+          <%= @active_group.name %>の城
+        </span>
+      </h2>
+      <%= image_tag castle_image_path_for(@progress.total_points),alt: "城の画像",class: "mx-auto mt-2",width: 300, height: 300 %>
 
+      <% pb = progress_bar(@progress) %>
+
+      <div class="mt-6 mx-auto max-w-[600px]">
+        <div class="flex items-baseline justify-between mb-2">
+          <span class="text-sm text-gray-600">グループ合計</span>
+          <span class="text-sm font-semibold"><%= pb.total_points_label %></span>
+        </div>
+
+        <progress class="progress progress-primary w-full h-5 md:h-6 lg:h-8 rounded-full" value="<%= pb.percent %>" max="100"></progress>
+
+        <div class="mt-1 flex justify-between text-xs text-gray-500">
+          <span><%= pb.start_label %></span>
+          <span><%= pb.end_label %></span>
+        </div>
+      </div>
+    </div>
+    <%= link_to "運動を記録する",new_exercise_log_path,class: "btn btn-primary",data: { theme: "pinkbtn" } %>
+  </div>
 <% else %>
-  <!-- HomeA,グループ未加入の場合 -->
-  <div class="min-h-[60vh] grid place-items-center px-4">
-    <div class="w-[min(420px,90vw)] text-center space-y-10">
-      <%= link_to "グループを作成", new_group_path, class: "btn btn-primary btn-lg w-full shadow" %>
-      <%= button_to "招待コードで参加（準備中）","#", disabled: true, class: "btn btn-outline btn-lg w-full" %>
+  <!-- HomeA, グループ未加入の場合 -->
+<div class="hero min-h-[60vh]">
+  <div class="hero-content text-center">
+    <div class="card bg-base-100 border border-base-300 rounded-2xl shadow-xl w-[min(480px,92vw)]">
+      <div class="card-body items-center text-center space-y-6">
+        <h1 class="card-title text-lg md:text-xl">まずはグループ参加・作成しよう</h1>
+
+        <%= link_to "グループを作成",new_group_path,class: "btn btn-lg w-full rounded-full btn-primary",data: { theme: "goldbtn" } %>
+
+        <p class="text-sm text-base-content/60">
+          ※グループに参加する場合は、リーダーから送られた<strong>招待リンク</strong>から参加してね！
+        </p>
+      </div>
     </div>
   </div>
+</div>
+
 <% end %>

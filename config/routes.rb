@@ -1,26 +1,31 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-    # 未ログイン → / (Top)
     unauthenticated do
       root to: "top#index", as: :unauthenticated_root
     end
 
-    # ログイン済み → / (Home)
     authenticated :user do
       root to: "home#index", as: :authenticated_root
     end
 
     resources :groups, only: [ :index, :new, :create, :show ] do
       resource :membership, only: [ :destroy ]
+      resources :cheers, only: :create
     end
 
     resources :exercise_logs, only: [ :index, :new, :create ]
+    resources :exercise_items, only: [ :index ]
+
+    resources :notifications, only: [ :index ]
+
   root "top#index"
 
   # 開発用（直接アクセスしたい時用）
   get :top,  to: "top#index"
   get :home, to: "home#index"
+
+  get "stats/points/daily", to: "stats/points#daily", defaults: { format: :json }
 
   get  "invite/:token", to: "invites#show",   as: :invite
   post "invite/:token", to: "invites#accept", as: :accept_invite

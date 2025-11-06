@@ -1,20 +1,31 @@
-<header class="bg-[linear-gradient(180deg,#F4A7B9_0%,#E07A94_100%)] text-white border-b border-white/20">
+<header data-theme="appbar" class="bg-gradient-to-b from-[var(--from)] to-[var(--to)] text-primary-content border-b border-accent/40">
   <div class="container mx-auto px-4 h-14 flex items-center justify-between">
     <%= link_to "ヘルスノ陣", root_path, class: "font-bold" %>
 
-    <nav class="flex items-center gap-3">
-      <%= link_to t(".guide"), top_path,
-                  class: "text-sm font-medium text-gray-700 hover:text-black hover:underline underline-offset-4" %>
+    <nav class="flex items-center gap-3 sm:gap-4">
+      <%= link_to top_path,
+        class: "inline-flex flex-col items-center justify-center w-12 h-14 gap-[2px] text-gray-700 hover:text-black" do %>
+        <%= image_tag "icons/question.svg", class: "w-5 h-5 pointer-events-none select-none", alt: "" %>
+        <span class="text-[10px] leading-none tracking-wide"><%= t(".guide") %></span>
+      <% end %>
 
       <% if user_signed_in? %>
-        <%= button_to t(".logout"),
-                destroy_user_session_path,
-                method: :delete,
-                form: { class: "inline", "data-turbo": "false" },
-                class: "text-sm text-gray-600 hover:text-black bg-transparent p-0 underline" %>
+        <%= link_to notifications_path, class: "inline-flex flex-col items-center justify-center w-12 h-14 gap-[2px] text-gray-700 hover:text-black" do %>
+          <%= image_tag "icons/bell.svg", class: "w-5 h-5 pointer-events-none select-none", alt: "" %>
+          <span class="text-[10px] leading-none tracking-wide"><%= t(".notifications") %></span>
+        <% end %>
+
+        <%= button_to destroy_user_session_path, method: :delete, form: { class: "inline", data: { turbo: false } },
+          class: "inline-flex flex-col items-center justify-center w-14 h-14 gap-[2px] text-gray-700 hover:text-black bg-transparent p-0" do %>
+          <%= image_tag "icons/sign-out.svg", class: "w-5 h-5 select-none pointer-events-none", alt: "" %>
+          <span class="text-[9px] leading-none whitespace-nowrap break-keep"><%= t(".logout") %></span>
+        <% end %>
+
       <% else %>
-        <%= link_to t(".login") , new_user_session_path,
-                    class: "text-sm text-gray-600 hover:text-black" %>
+        <%= link_to new_user_session_path, class: "inline-flex flex-col items-center justify-center w-12 h-14 gap-[2px] text-gray-700 hover:text-black" do %>
+          <%= image_tag "icons/sign-in.svg", class: "w-5 h-5 select-none pointer-events-none", alt: "" %>
+          <span class="text-[10px] leading-none tracking-wide"><%= t(".login") %></span>
+        <% end %>
       <% end %>
     </nav>
   </div>

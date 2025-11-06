@@ -1,7 +1,15 @@
-<h1><%= @group.name %></h1>
-<p>メンバー数：<%= @group.users.count %></p>
-
-<% if @group.owner_id == current_user.id && @group.invite_token.present? %>
-  <h2>招待リンク</h2>
-  <p><%= invite_path(token: @group.invite_token) %></p>
-<% end %>
+<div class="grid place-items-center min-h-[60vh]">
+  <div class="card w-full max-w-md shadow-xl bg-base-100 rounded-2xl">
+    <div class="card-body items-center text-center">
+      <h1 class="card-title text-2xl font-bold">
+        <%= @group.name %>
+      </h1>
+      <p class="mt-2 text-base-content/70">
+        メンバー数：
+        <span class="badge badge-lg rounded-full px-3 py-2">
+          <%= @group.users.count %> 人
+        </span>
+      </p>
+    </div>
+  </div>
+</div>

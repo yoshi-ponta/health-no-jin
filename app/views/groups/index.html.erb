@@ -1,40 +1,75 @@
 <section class="container mx-auto max-w-screen-xl">
-  <h1 class="text-xl font-bold mb-4">グループ</h1>
-</section>
-
-<% @groups.each do |group| %>
-  <div class="group-card">
-    <h3><%= link_to group.name, group_path(group) %></h3>
-    <p>現在 <%= group.users.count %> 人</p>
-
-    <% if group.owner_id == current_user.id && group.invite_token.present? %>
-      <div class="invite-block mt-2">
-        <p class="text-sm">
-          招待リンク：
-          <span class="font-mono break-all"><%= link_to invite_path(token: group.invite_token),invite_path(token: group.invite_token),class: "font-mono break-all underline" %></span>
-        </p>
-        <button
-          type="button"
-          data-copy="<%= invite_path(token: group.invite_token) %>"
-          onclick="(async (btn)=>{try{
-            await navigator.clipboard.writeText(btn.dataset.copy);
-            const old = btn.textContent; btn.textContent='コピーしました';
-            setTimeout(()=>btn.textContent=old||'コピー',1500);
-          }catch(e){
-            prompt('コピーできない場合は手動でコピーしてください', btn.dataset.copy);
-          }})(this)">
-          コピー
-        </button>
+  <% if @group.nil? %>
+    <h1 class="text-xl font-bold mb-4">グループ</h1>
+    <div class="rounded-2xl border border-dashed p-8 text-center text-sm text-gray-500">
+      参加中のグループはありません
+      <div class="mt-3">
+        <%= link_to "グループを作成する", new_group_path, class: "underline" %>
       </div>
-    <% end %>
+    </div>
+  <% else %>
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+      <h1 class="text-xl font-bold"><%= @group.name %> のメンバー</h1>
 
-    <%# unless group.owner_id == current_user.id %>  <!-- オーナーには退会ボタンを見せない。開発用にコメントアウト -->
-      <%= button_to "グループを抜ける",
-          group_membership_path(group),
-          method: :delete,
-          form: { data: { turbo: false } },
-          data: { turbo_confirm: "本当に退会しますか？" },
-          class: "btn btn-outline" %>
-    <%# end %>
-  </div>
-<% end %>
+      <div class="flex flex-wrap items-center justify-end gap-3">
+        <%= render "leave_dialog" %>
+      </div>
+    </div>
+
+    <% if @members.blank? %>
+      <div class="rounded-2xl border border-dashed p-8 text-center text-sm text-gray-500">
+        メンバーがいません
+      </div>
+    <% else %>
+      <ul class="space-y-2">
+        <% @members.each do |membership| %>
+          <% member_user = membership.user %>
+          <% is_owner = (member_user.id == @group.owner_id) %>
+          <% is_me    = (member_user.id == current_user.id) %>
+
+          <li class="grid grid-cols-[auto,1fr,auto] items-center gap-3 rounded-2xl p-3 shadow-sm bg-white">
+            <div class="min-w-0 flex flex-col col-span-2">
+              <div class="text-sm font-medium truncate">
+                <% display_name = member_user.name.presence || t(".display_name_fallback") %>
+                <%= display_name %>
+                <% if is_me %><span class="text-gray-500 text-xs">(あなた)</span><% end %>
+              </div>
+
+              <div class="mt-1 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <%= user_avatar_tag(member_user) %>
+                  <span class="ml-5 px-2 py-1 rounded-full bg-amber-100 text-amber-800 leading-none inline-flex items-baseline">
+                    <span class="text-xl font-bold tabular-nums leading-none">
+                      <%= (@points_by_user[member_user.id] || 0) %>
+                    </span>
+                    <span class="ml-1 text-xs font-semibold align-baseline">pt</span>
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <% if is_owner %>
+                    <span class="px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 font-semibold leading-none">大将</span>
+                  <% end %>
+                  <% unless is_me %>
+                    <% cheered = Cheer.cheered_today?(group: @group, from_user: current_user, to_user: member_user) %>
+                    <% if cheered %>
+                      <button data-theme="pinkbtn" class="btn btn-primary text-base px-4 h-9 rounded-2xl leading-none" disabled>応援済み</button>
+                    <% else %>
+                      <%= button_to "応援する",
+                            group_cheers_path(@group, to_user_id: member_user.id),
+                            method: :post,
+                            form: { data: { turbo: false } },
+                            class: "btn btn-primary text-base px-4 h-9 rounded-2xl leading-none",
+                            data: { theme: "pinkbtn" } %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= render "invite_cta", group: @group %>
+  <% end %>
+</section>

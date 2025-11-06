@@ -1,2 +1,52 @@
-<h1>Mypages#show</h1>
-<p>Find me in app/views/mypages/show.html.erb</p>
+<div class="max-w-3xl mx-auto space-y-8">
+  <header>
+    <div>
+      <h1 class="text-2xl font-bold text-center">マイページ</h1>
+    </div>
+  </header>
+
+  <!-- プロフィール -->
+  <section id="profile" class="p-4 rounded-xl bg-amber-50 shadow-md">
+    <h2 class="text-xl font-semibold mb-3">プロフィール</h2>
+
+    <div class="flex items-center gap-4 mb-4">
+      <%= user_avatar_tag(@user, size: 96, class_name: "ring-1") %>
+      <div>
+        <div class="text-sm text-gray-600">名前</div>
+        <div class="text-xl font-bold sm:text-2xl"><%= @user.name %></div>
+      </div>
+      <%= link_to "プロフィールの編集", edit_mypage_path, class: "btn btn-outline btn-sm ml-auto" %>
+    </div>
+
+    <div>
+      <div class="text-sm text-gray-600">ひとこと</div>
+      <p class="whitespace-pre-line"><%= @user.try(:introduction) || "（未設定）" %></p>
+    </div>
+  </section>
+
+  <!-- 所属グループ -->
+  <section id="profile" class="p-4 rounded-xl bg-amber-50 shadow-md">
+    <h2 class="text-xl font-semibold mb-3">所属グループ</h2>
+    <% if @memberships.present? %>
+      <ul class="space-y-2">
+        <% @memberships.each do |m| %>
+          <li class="flex items-center justify-between p-3 rounded-lg ">
+            <span class="font-semibold sm:text-2xl"><%= m.group.name %></span>
+            <%= render "groups/leave_dialog", group: m.group %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-600">所属グループはありません。</p>
+    <% end %>
+  </section>
+
+  <!-- 運動記録グラフ -->
+  <section id="stats" class="p-4 rounded-xl bg-amber-50 shadow-md">
+  <h2 class="text-xl font-semibold mb-3 text-center">運動の記録</h2>
+  <%= render "mypages/stats_points",
+        days: 30, height_px: 300,
+        chart_id: "pointsChart",
+        endpoint: "/stats/points/daily" %>
+</section>
+</div>

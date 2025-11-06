@@ -1,17 +1,30 @@
 <div class="container mx-auto max-w-screen-sm px-4 py-4 space-y-4">
   <header class="space-y-1 text-center">
     <h1 class="text-xl font-bold">運動を記録</h1>
-    <p class="text-sm text-gray-600">今日の運動を記録しましょう。</p>
+    <p class="text-sm text-gray-600">少しでも運動出来たらポイントゲット！</p>
   </header>
 
-  <% if @exercise_log.errors.any? %>
-    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-red-700 text-sm">
-      入力エラーが <%= @exercise_log.errors.count %> 件あります。各項目の下のメッセージを確認してください。
-    </div>
+  <%= form_with model: @exercise_log, url: exercise_logs_path, data: { turbo: false }, id: "exercise-log-form" do |f| %>
+    <%= f.hidden_field :exercise_item_id, id: "exercise_log_exercise_item_id" %>
+    <%= f.hidden_field :performed_at,     id: "exercise_log_performed_at" %>
   <% end %>
 
-  <section class="rounded-2xl border shadow-sm p-4 sm:p-6 bg-white ">
-    <%= render "form", exercise_log: @exercise_log %>
+  <section class="space-y-2">
+    <h2 class="text-sm font-semibold text-gray-600">運動項目</h2>
+
+    <div class="grid grid-cols-3 gap-3 sm:gap-4">
+      <% @exercise_categories.each_with_index do |c, i| %>
+        <% next if c[:items].blank? %>
+        <% modal_id = "m-#{(c[:key] || 'cat').to_s.parameterize.presence || 'cat'}-#{i}-modal" %>
+
+        <%= render "category_card",
+          key:      c[:key],
+          name:     c[:name],
+          icon:     c[:icon],
+          items:    c[:items],
+          modal_id: modal_id %>
+      <% end %>
+    </div>
   </section>
 
   <div class="pt-2">

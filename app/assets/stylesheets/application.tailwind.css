@@ -1,15 +1,31 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui"{themes: light --default, dark --prefersdark, luxury;}
 
 @theme {
   --font-serif: "Kaisei Decol", ui-serif, serif;
+  --color-slate-900: oklch(0.14 0.03 260);
+  --color-slate-600: oklch(0.35 0.03 260);
 
-  --color-slate-900: oklch(0.18 0.02 260);
-  --color-slate-600: oklch(0.45 0.02 260);
-
-  --color-indigo:     oklch(0.45 0.12 256);
-  --color-indigo-600: oklch(0.38 0.12 256);
+  --color-indigo:     oklch(0.32 0.14 250);
+  --color-indigo-600: oklch(0.58 0.08 250);
   --color-muted: var(--color-slate-600);
 
   --spacing-45: 11.25rem;
+}
+
+@layer base {
+  [data-theme="goldbtn"] {
+    --color-primary: #D4AF37;
+    --color-primary-content: #2b1b00;
+  }
+
+  [data-theme="pinkbtn"] {
+    --color-primary: #E75480;
+    --color-primary-content: #4b1f2c;
+  }
+
+  [data-theme="appbar"] {
+    --from: #528566;
+    --to:   #486A57;
+  }
 }

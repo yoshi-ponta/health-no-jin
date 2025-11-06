@@ -1,0 +1,59 @@
+<% group ||= local_assigns[:group] || (defined?(@group) ? @group : nil) %>
+<% unless group %>
+  <% return %>
+<% end %>
+
+<div class="inline-flex items-center" data-leave>
+  <button type="button" class="btn btn-outline btn-sm" data-leave-open>
+    グループを脱退
+  </button>
+
+  <div class="hidden">
+    <%= button_to "実行",
+      group_membership_path(group),
+      method: :delete,
+      form:  { class: "inline", data: { turbo: false, turbo_frame: "_top", leave_form: true } },
+      class: "hidden",
+      data:  { disable_with: "処理中…" } %>
+  </div>
+
+  <dialog data-leave-dialog aria-labelledby="leave-title-<%= group.id %>" class="modal">
+  <div class="modal-box max-w-sm">
+    <h2 id="leave-title-<%= group.id %>" class="font-bold text-base mb-1">
+      本当にグループを脱退しますか？
+    </h2>
+    <p class="text-sm text-base-content/70 mb-4">
+      離脱するとグループ内で集めたポイントはリセットされます。
+    </p>
+
+    <div class="modal-action">
+      <button type="button" class="btn btn-outline btn-sm" data-leave-cancel>キャンセル</button>
+      <button type="button" class="btn btn-primary btn-sm" data-leave-ok>脱退する</button>
+    </div>
+  </div>
+
+  <form method="dialog" class="modal-backdrop">
+    <button aria-label="閉じる"></button>
+  </form>
+</dialog>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-leave]").forEach((wrap) => {
+      const openButton    = wrap.querySelector("[data-leave-open]")
+      const dialogEl      = wrap.querySelector("[data-leave-dialog]")
+      const confirmButton = wrap.querySelector("[data-leave-ok]")
+      const cancelButton  = wrap.querySelector("[data-leave-cancel]")
+      const deleteForm    = wrap.querySelector("[data-leave-form='true']")
+
+      openButton?.addEventListener("click", () => dialogEl.showModal())
+      cancelButton?.addEventListener("click", () => dialogEl.close())
+      confirmButton?.addEventListener("click", () => {
+        confirmButton.disabled = true
+        deleteForm?.requestSubmit()
+      })
+    })
+  })
+</script>

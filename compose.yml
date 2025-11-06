@@ -37,6 +37,8 @@ services: # コンテナの定義開始
       DB_HOST: db
       DB_USERNAME: postgres
       DB_PASSWORD: password
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
     ports: # ポート設定
       - "3000:3000" # Rails標準のポート
     depends_on: # 依存関係の設定
