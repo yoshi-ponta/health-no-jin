@@ -3,21 +3,23 @@
 <head>
   <%= display_meta_tags(default_meta_tags) %>
 
-<%# Google Analytics 後でターボに統一する%>
   <% if Rails.env.production? && ENV["GA_MEASUREMENT_ID"].present? %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["GA_MEASUREMENT_ID"] %>"></script>
-    <script>
+    <script nonce="<%= content_security_policy_nonce %>">
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
+
       gtag('config', '<%= ENV["GA_MEASUREMENT_ID"] %>', { send_page_view: false });
 
       function sendPV(){
         if (!window.gtag) return;
+
         var path = location.pathname + location.search;
         if (window.__ga_last_path === path) return;
         window.__ga_last_path = path;
-        gtag('config', '<%= ENV["GA_MEASUREMENT_ID"] %>', {
+
+        gtag('event', 'page_view', {
           page_location: location.href,
           page_path: path,
           page_title: document.title
@@ -26,7 +28,7 @@
 
       document.addEventListener('DOMContentLoaded', sendPV);
       document.addEventListener('turbo:load', sendPV);
-    </script>
+      </script>
   <% end %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
