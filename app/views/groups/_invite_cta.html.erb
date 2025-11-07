@@ -1,5 +1,5 @@
 <% return unless group.owner_id == current_user.id && group.invite_token.present? %>
-<% url = invite_path(token: group.invite_token) %>
+<% url = invite_url(token: group.invite_token) %>
 
 <div class="mt-10 text-center space-y-3">
   <h2 class="text-sm md:text-base font-semibold text-base-content/80">メンバーを招待しましょう！</h2>
