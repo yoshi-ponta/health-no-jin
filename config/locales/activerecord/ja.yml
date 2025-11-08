@@ -9,3 +9,9 @@ ja:
         first_name: 名
         password: パスワード
         password_confirmation: パスワード確認
+    errors:
+      models:
+        user:
+          attributes:
+            reset_password_token:
+              expired: "パスワード再設定用リンクの有効期限が切れています。もう一度メールを送信してください。"
