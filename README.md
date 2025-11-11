@@ -22,16 +22,55 @@ https://health-no-jin.onrender.com
 介護の現場で、「もっと早く健康に気をつけていればよかった」「家族や友達を大切にすればよかった」などと後悔する方や「大切な人と、いつまでも元気で一緒に暮らしたい」という思いを抱く方をたくさん見てきました。このサービスを通じて、ユーザーが大切な人とのつながりを保ちつつ、楽しみながら健康を意識できるような機会を提供したいと考えています。
 
 # 機能紹介
-[![Image from Gyazo](https://i.gyazo.com/832fdbe6043a47a805d138bed0687c9b.gif)](https://gyazo.com/832fdbe6043a47a805d138bed0687c9b)
+| ユーザー登録 / ログイン |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/832fdbe6043a47a805d138bed0687c9b.gif)](https://gyazo.com/832fdbe6043a47a805d138bed0687c9b) |
+| <p align="left">『名前』『メールアドレス』『パスワード』『確認用パスワード』を入力してユーザー登録を行います。ユーザー登録後は、自動的にログイン処理が行われるようになっており、そのまま直ぐにサービスを利用する事が出来ます。<br>また、Googleアカウントを用いてGoogleログインを行う事も可能です。</p> |
+<br>
+
+| グループ作成 / 参加 |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/22b67ba20322db533c7812c8bb4246a5.gif)](https://gyazo.com/22b67ba20322db533c7812c8bb4246a5) |
+| <p align="left">グループを作成すると、自動でグループのリーダーになり、大将という称号が与えられます。グループに参加する場合は、グループリーダーの招待リンクから参加することで、グループに参加できます。<br>また、グループ一覧画面にて、招待リンクを送ることができます。</p> |
+<br>
+
+| 運動記録 |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/aff37f5fb871254fc37dc088c41d8b63.gif)](https://gyazo.com/aff37f5fb871254fc37dc088c41d8b63) |
+| <p align="left">運動記録画面で運動をタップ操作で簡単に記録ができます。記録したら、ポイントが追加されて、進捗ゲージに反映され、城が成長します。<br>また、マイページのグラフと獲得ポイントが連携されており、直近一ヶ月間の運動記録が閲覧できます。</p> |
+<br>
+
+| 応援機能 |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/0e1a064313be7b8f2db05414f3f3795e.gif)](https://gyazo.com/0e1a064313be7b8f2db05414f3f3795e) |
+| <p align="left">グループ一覧では、メンバーの獲得ポイントが確認できます。一日一回までメンバ一人に対して応援ができます。<br>また、通知一覧から誰に応援されたか確認できます</p> |
+<br>
+
+| マイページ |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/b510fcdf2edc9b3e21ff43517487e12a.gif)](https://gyazo.com/b510fcdf2edc9b3e21ff43517487e12a) |
+| <p align="left">マイページではプロフィールの編集ができ、ひとことやアイコン画像、名前の変更ができます。<br>また、マイページのグラフと獲得ポイントが連携されており、直近一ヶ月間の運動記録が閲覧できます。</p> |
+<br>
 
 # 技術構成
 
 ## 使用技術
+| カテゴリ | 技術内容 |
+| --- | --- | 
+| サーバーサイド | Ruby on Rails 7.0.6・Ruby 3.2.2 |
+| フロントエンド | Ruby on Rails・JavaScript |
+| CSSフレームワーク | Tailwindcss + daisyUI |
+| Web API | OpenAI API(GPT-4)・Google API・LINE Developers |
+| データベースサーバー | PostgreSQL |
+| ファイルサーバー | AWS S3 |
+| アプリケーションサーバー | Fly.io |
+| バージョン管理ツール | GitHub・Git Flow |
+<br>
 
 ## ER図
 
 ## 画面遷移図
-
+[![Image from Gyazo](https://i.gyazo.com/62545588b6d157364a06bc8e96738729.png)](https://gyazo.com/62545588b6d157364a06bc8e96738729)
 
 # 今後の展開
 - 個人ランダムマッチング対戦の実装
