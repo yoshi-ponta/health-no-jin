@@ -19,8 +19,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'sentry-ruby'
-gem 'sentry-rails'
+gem "sentry-ruby"
+gem "sentry-rails"
 
 gem "devise"
 
