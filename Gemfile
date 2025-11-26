@@ -24,7 +24,7 @@ gem "sentry-rails"
 
 gem "devise"
 
-gem "rails-i18n", "~> 8.0"
+gem "rails-i18n", "~> 8.1"
 
 gem "cssbundling-rails"
 
