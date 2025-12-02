@@ -29,7 +29,7 @@ gem "rails-i18n", "~> 8.1"
 gem "cssbundling-rails"
 
 gem "mini_magick"
-gem "aws-sdk-s3", "~> 1.205"
+gem "aws-sdk-s3", "~> 1.206"
 gem "image_processing"
 
 gem "omniauth-google-oauth2"
